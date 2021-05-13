@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+
+                    <ImageView
+                        android:id="@+id/tomorrow_cook_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/tomorrow_cook"
+                        android:layout_marginTop="70dp"/>
+
+                    <ImageView
+                        android:id="@+id/recommend_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="273dp"
+                        app:srcCompat="@drawable/noodle" />
+
+                    <ImageView
+                        android:id="@+id/recommend_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        app:srcCompat="@drawable/recommend" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:scaleType="fitXY"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="389dp"
+                        android:layout_height="match_parent"
+                        android:fillViewport="false">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:scaleType="fitXY"
+                            android:layout_marginLeft="5dp">
+
+                            <ImageButton
+                                android:id="@+id/rank1"
+                                android:layout_width="158dp"
+                                android:layout_height="141dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat="@drawable/meat"/>
+
+                            <ImageButton
+                                android:id="@+id/rank2"
+                                android:layout_width="158dp"
+                                android:layout_height="141dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat="@drawable/chicken" />
+
+                            <ImageButton
+                                android:id="@+id/rank3"
+                                android:layout_width="158dp"
+                                android:layout_height="141dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat="@drawable/soup" />
+
+                            <ImageButton
+                                android:id="@+id/rank4"
+                                android:layout_width="158dp"
+                                android:layout_height="141dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat="@drawable/soup" />
+
+                            <ImageButton
+                                android:id="@+id/rank5"
+                                android:layout_width="158dp"
+                                android:layout_height="141dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat="@drawable/soup" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <ImageButton
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/circle_icon_home" />
+
+        <ImageButton
+            android:id="@+id/kind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/icon_kind" />
+
+        <ImageButton
+            android:id="@+id/posting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/icon_posting" />
+
+        <ImageButton
+            android:id="@+id/sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/icon_sale" />
+
+        <ImageButton
+            android:id="@+id/mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/icon_mypage" />
+    </LinearLayout>
+</LinearLayout>
