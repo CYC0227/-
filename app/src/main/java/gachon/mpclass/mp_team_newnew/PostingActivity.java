@@ -3,17 +3,24 @@ package gachon.mpclass.mp_team_newnew;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
+
 public class PostingActivity extends AppCompatActivity {
     private ListView listView;
     private ListAdapter adapter;
+    private EditText title;
+    private EditText description;
+    private EditText information;
 
     private EditText edt_title;
     private EditText edt_sub;
     private ImageButton btn_add;
+    private Button btn_submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +32,18 @@ public class PostingActivity extends AppCompatActivity {
         edt_sub = (EditText) findViewById(R.id.edit_ingredients_num);
         btn_add = (ImageButton) findViewById(R.id.plus);
         listView = (ListView) findViewById(R.id.listview);
+        btn_submit = (Button)findViewById(R.id.submit);
+
+        information = (EditText) findViewById(R.id.edit_information);
+        description = (EditText) findViewById(R.id.edit_description);
+        title = (EditText) findViewById(R.id.title);
+
+
 
         adapter = new ListAdapter(PostingActivity.this);
         listView.setAdapter(adapter);
 
-        // 데이터 추가하기
+        // 재료 추가하기
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +53,19 @@ public class PostingActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
 
+            }
+        });
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PostingForm form = new PostingForm();
+                form.setTitle(edt_title.getText().toString());
+                form.setInformation(information.getText().toString());
+                form.setDescription(description.getText().toString());
+
+                btn_submit = (Button)findViewById(R.id.submit);
+//form으로 완성된 데이터를 어떻게 서버와 주고받을지 찾아야함
             }
         });
 
