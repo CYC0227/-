@@ -3,7 +3,6 @@ package gachon.mpclass.mp_team_newnew.form;
 
 public class PostingForm {
 
-    private Long userId;
     private String imgURL;
     private String title;
     private String description;
@@ -11,20 +10,24 @@ public class PostingForm {
     private String ingredients_name;
     private String ingredients_quantity;
 
+    @Override
+    public String toString() {
+        return "PostingForm{" +
+                ", imgURL='" + imgURL + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", information='" + information + '\'' +
+                ", ingredients_name='" + ingredients_name + '\'' +
+                ", ingredients_quantity='" + ingredients_quantity + '\'' +
+                '}';
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getImgURL() {

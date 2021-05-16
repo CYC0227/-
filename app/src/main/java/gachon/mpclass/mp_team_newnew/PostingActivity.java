@@ -2,6 +2,7 @@ package gachon.mpclass.mp_team_newnew;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostingActivity extends AppCompatActivity {
     private ListView listView;
@@ -21,6 +27,10 @@ public class PostingActivity extends AppCompatActivity {
     private EditText edt_sub;
     private ImageButton btn_add;
     private Button btn_submit;
+
+    RetrofitClient retrofitClient = new RetrofitClient();
+
+    Call<PostingForm> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +74,28 @@ public class PostingActivity extends AppCompatActivity {
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
 
-                btn_submit = (Button)findViewById(R.id.submit);
-//form으로 완성된 데이터를 어떻게 서버와 주고받을지 찾아야함
+                call = retrofitClient.retrofitService.setPostBody(form);
+
+                call.enqueue(new Callback<PostingForm>() {
+                    @Override
+                    public void onResponse(Call<PostingForm> call, Response<PostingForm> response) {
+                        if(response.isSuccessful()){
+                            PostingForm result = response.body();
+
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                            else{
+                                Log.d("tag2","실패");
+                            }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostingForm> call, Throwable t) {
+                    Log.d("tag3","실패" + t.getMessage());
+//서버와 통신가능하지만, 여러 수정필요
+                  }
+                });
             }
         });
 
