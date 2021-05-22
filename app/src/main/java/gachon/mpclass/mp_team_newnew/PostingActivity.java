@@ -82,7 +82,6 @@ public class PostingActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             PostingForm result = response.body();
 
-
                             Log.d("tag1","성공" + result.toString());
                         }
                             else{

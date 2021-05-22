@@ -1,5 +1,6 @@
 package gachon.mpclass.mp_team_newnew;
 
+import gachon.mpclass.mp_team_newnew.form.MemberForm;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,4 +17,7 @@ public interface RetrofitService {
 
     @POST("postings/new")
     Call<PostingForm> setPostBody(@Body PostingForm post);
+
+    @POST("members/new")
+    Call<MemberForm> setMemberBody(@Body MemberForm member);
 }
