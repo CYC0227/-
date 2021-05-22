@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">mp_team_newnew</string>
+
+    <string-array name="kind_day">
+        <item>Christmas</item>
+        <item>Camping</item>
+        <item>Couple Anniversary</item>
+        <item>Diet</item>
+        <item>Speed</item>
+        <item>Holiday</item>
+        <item>Healthy Food</item>
+        <item>Invite</item>
+        <item>Alcohol</item>
+        <item>X</item>
+    </string-array>
+
+    <string-array name="kind_country">
+        <item>India</item>
+        <item>Vietnam</item>
+        <item>China</item>
+        <item>France</item>
+        <item>Thailand</item>
+        <item>Japan</item>
+        <item>X</item>
+    </string-array>
 </resources>
