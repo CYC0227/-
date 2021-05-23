@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import java.util.List;
+
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,12 +91,49 @@ public class PostingActivity extends AppCompatActivity {
                             }
                     }
 
+
                     @Override
                     public void onFailure(Call<PostingForm> call, Throwable t) {
                     Log.d("tag3","실패" + t.getMessage());
 //서버와 통신가능하지만, 여러 수정필요
                   }
                 });
+
+
+                //test
+                Call<List<PostingForm>> call2;
+                call2 = retrofitClient.retrofitService.getPosts("demouser");
+//
+//                call2.enqueue(new Callback<PostingForm>() {
+//                    @Override
+//                    public void onResponse(Call<PostingForm> call, Response<PostingForm> response) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<PostingForm> call, Throwable t) {
+//
+//                    }
+//                });
+
+                call2.enqueue(new Callback<List<PostingForm>>() {
+                    @Override
+                    public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
+                        for(PostingForm postingForm: response.body()) {
+                            System.out.println(postingForm.toString());
+                            System.out.println("aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbb");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<PostingForm>> call, Throwable t) {
+                        System.out.println(t.getMessage());
+                        Log.d("tag4","실패" + t.getMessage());
+                    }
+                });
+
+
+                //test
             }
         });
 
