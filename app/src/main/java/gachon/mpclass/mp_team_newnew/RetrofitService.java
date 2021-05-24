@@ -15,7 +15,7 @@ public interface RetrofitService {
 
 
     // @GET( EndPoint-자원위치(URI) )
-    @GET("postings/postingList")
+    @GET("postings/postingList")// postings/postingList?email = email_string
     Call<List<PostingForm>> getPosts(@Query("email") String email);
 
     @POST("postings/new")
