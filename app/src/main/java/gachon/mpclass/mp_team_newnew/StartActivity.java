@@ -24,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // main -> new
+                // start -> login
                 Intent myintent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(myintent, 1);
             }
@@ -34,7 +34,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // main -> new
+                // start -> join
                 Intent myintent = new Intent(getApplicationContext(), JoinActivity.class);
                 startActivityForResult(myintent, 1);
             }
