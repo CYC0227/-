@@ -49,36 +49,39 @@ public class LoginActivity extends AppCompatActivity {
                 email = edit_email.getText().toString();
                 password = edit_password.getText().toString();
 
-                System.out.println("email = " + email);
-                System.out.println("pw = " + password);
-
-                call = retrofitClient.retrofitService.login(email, password);
-
-                System.out.println(email);
-
-                call.enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-
-                        Boolean isSuccessful = response.body();
-
-                        if(isSuccessful){
-                            // login -> main
+                // login -> main
                             Intent myintent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivityForResult(myintent, 1);
-                        }
-                        else {
-                            //오류 토스트 메세지
-                            Toast.makeText(getApplicationContext(), "이메일이나 비밀번호를 확인해주세요", Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        System.out.println(t.getMessage());
-                        Log.d("login","실패" + t.getMessage());
-                    }
-                });
+//                System.out.println("email = " + email);
+//                System.out.println("pw = " + password);
+//
+//                call = retrofitClient.retrofitService.login(email, password);
+//
+//                System.out.println(email);
+//
+//                call.enqueue(new Callback<Boolean>() {
+//                    @Override
+//                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+//
+//                        Boolean isSuccessful = response.body();
+//
+//                        if(isSuccessful){
+//                            // login -> main
+//                            Intent myintent = new Intent(getApplicationContext(), MainActivity.class);
+//                            startActivityForResult(myintent, 1);
+//                        }
+//                        else {
+//                            //오류 토스트 메세지
+//                            Toast.makeText(getApplicationContext(), "이메일이나 비밀번호를 확인해주세요", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Boolean> call, Throwable t) {
+//                        System.out.println(t.getMessage());
+//                        Log.d("login","실패" + t.getMessage());
+//                    }
+//                });
 
             }
         });
