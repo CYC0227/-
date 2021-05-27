@@ -2,6 +2,7 @@ package gachon.mpclass.mp_team_newnew;
 
 import java.util.List;
 
+import gachon.mpclass.mp_team_newnew.form.IsLoggedIn;
 import gachon.mpclass.mp_team_newnew.form.LoginForm;
 import gachon.mpclass.mp_team_newnew.form.MemberForm;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import gachon.mpclass.mp_team_newnew.form.IsLoggedIn;
 import gachon.mpclass.mp_team_newnew.form.LoginForm;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import retrofit2.Call;
@@ -19,8 +20,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText edit_email;
-    EditText edit_password;
+    private EditText edit_email;
+    private EditText edit_password;
 
     String email;
     String password;
@@ -40,15 +41,20 @@ public class LoginActivity extends AppCompatActivity {
         edit_email = (EditText)findViewById(R.id.editTextId);
         edit_password = (EditText)findViewById(R.id.editTextPassword);
 
-        email = edit_email.getText().toString();
-        password = edit_password.getText().toString();
 
         login = (ImageButton)findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                email = edit_email.getText().toString();
+                password = edit_password.getText().toString();
+
+                System.out.println("email = " + email);
+                System.out.println("pw = " + password);
 
                 call = retrofitClient.retrofitService.login(email, password);
+
+                System.out.println(email);
 
                 call.enqueue(new Callback<Boolean>() {
                     @Override
