@@ -1,11 +1,13 @@
 package gachon.mpclass.mp_team_newnew;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,8 +64,14 @@ public class JoinActivity extends AppCompatActivity {
                         if(response.isSuccessful()){
                             MemberForm result = response.body();
                             Log.d("tag1","성공" + result.toString());
+
+                            Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_LONG).show();
+                            // join -> login ( 성공하면 로그인 창으로 이동 )
+                            Intent myintent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivityForResult(myintent, 1);
                         }
                         else{
+                            Toast.makeText(getApplicationContext(), "이미 가입된 이메일입니다.", Toast.LENGTH_LONG).show();
                             Log.d("tag2","실패");
                         }
                     }

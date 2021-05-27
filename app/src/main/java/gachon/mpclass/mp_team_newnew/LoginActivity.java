@@ -1,10 +1,12 @@
 package gachon.mpclass.mp_team_newnew;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,10 +57,13 @@ public class LoginActivity extends AppCompatActivity {
                         Boolean isSuccessful = response.body();
 
                         if(isSuccessful){
-                            //다음 화면으로 넘어가기
+                            // login -> main
+                            Intent myintent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivityForResult(myintent, 1);
                         }
                         else {
                             //오류 토스트 메세지
+                            Toast.makeText(getApplicationContext(), "이메일이나 비밀번호를 확인해주세요", Toast.LENGTH_LONG).show();
                         }
                     }
 
