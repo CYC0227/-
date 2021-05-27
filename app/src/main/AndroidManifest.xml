@@ -12,6 +12,7 @@
         android:theme="@style/Theme.Mp_team_newnew"
         android:usesCleartextTraffic="true">
 
+        <activity android:name=".ChristmasActivity"/>
         <activity android:name=".ClassificationActivity"/>
         <activity android:name=".MypageActivity"/>
         <activity android:name=".MyrecipeActivity"/>
