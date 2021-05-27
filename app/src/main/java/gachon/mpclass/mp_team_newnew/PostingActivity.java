@@ -29,7 +29,7 @@ public class PostingActivity extends AppCompatActivity {
     private EditText edt_title;
     private EditText edt_sub;
     private ImageButton btn_add;
-    private Button btn_submit;
+    private ImageButton btn_submit;
 
     public static String session_email = "kevin";//로그인 되는 순간 생성되야함. LoginActivity로 이동 필요
 
@@ -55,7 +55,7 @@ public class PostingActivity extends AppCompatActivity {
         edt_sub = (EditText) findViewById(R.id.edit_ingredients_num);
         btn_add = (ImageButton) findViewById(R.id.plus);
         listView = (ListView) findViewById(R.id.listview);
-        btn_submit = (Button)findViewById(R.id.submit);
+        btn_submit = (ImageButton) findViewById(R.id.submit);
 
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
