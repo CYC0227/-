@@ -30,6 +30,8 @@ public class PostingActivity extends AppCompatActivity {
     private ImageButton btn_add;
     private Button btn_submit;
 
+    public static String session_email = "kevin";//로그인 되는 순간 생성되야함. LoginActivity로 이동 필요
+
     RetrofitClient retrofitClient = new RetrofitClient();
 
     Call<PostingForm> call;
@@ -76,7 +78,8 @@ public class PostingActivity extends AppCompatActivity {
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
 
-                call = retrofitClient.retrofitService.setPostBody(form);
+                call = retrofitClient.retrofitService.setPostBody(form, session_email);
+
 
                 call.enqueue(new Callback<PostingForm>() {
                     @Override

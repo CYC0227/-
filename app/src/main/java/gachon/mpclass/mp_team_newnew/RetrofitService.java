@@ -19,7 +19,7 @@ public interface RetrofitService {
     Call<List<PostingForm>> getPosts(@Query("email") String email);
 
     @POST("postings/new")
-    Call<PostingForm> setPostBody(@Body PostingForm post);
+    Call<PostingForm> setPostBody(@Body PostingForm post, @Query("email") String email);
 
 
     @POST("members/new")
