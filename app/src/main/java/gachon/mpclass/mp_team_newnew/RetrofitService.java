@@ -2,6 +2,7 @@ package gachon.mpclass.mp_team_newnew;
 
 import java.util.List;
 
+import gachon.mpclass.mp_team_newnew.form.LoginForm;
 import gachon.mpclass.mp_team_newnew.form.MemberForm;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import retrofit2.Call;
@@ -21,7 +22,9 @@ public interface RetrofitService {
     @POST("postings/new")
     Call<PostingForm> setPostBody(@Body PostingForm post, @Query("email") String email);
 
+    @POST( "/members/new")
+    Call<MemberForm> joinMember(@Body MemberForm member);
 
-    @POST("members/new")
-    Call<MemberForm> setMemberBody(@Body MemberForm member);
+    @GET("/members/login")
+    Call<Boolean> login(@Query("email") String email, @Query("pw") String pw);
 }
