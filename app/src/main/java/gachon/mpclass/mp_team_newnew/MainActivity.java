@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton button_kind;
     ImageButton button_mypage;
     ImageButton button_posting;
+    ImageButton button_sale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         button_kind = findViewById(R.id.kind);
         button_posting = findViewById(R.id.posting);
         button_mypage = findViewById(R.id.mypage);
-
+        button_sale = findViewById(R.id.sale);
 
         button_kind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // main -> new
                 Intent myintent = new Intent(getApplicationContext(), MypageActivity.class);
+                startActivityForResult(myintent, 1);
+            }
+        });
+
+        button_sale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // main -> new
+                Intent myintent = new Intent(getApplicationContext(), SaleActivity.class);
                 startActivityForResult(myintent, 1);
             }
         });
