@@ -35,6 +35,7 @@ public class ChristmasActivity extends AppCompatActivity {
         adapter.addItem(new MyItem("123"));
         adapter.addItem(new MyItem("456"));
         adapter.addItem(new MyItem("789"));
+        adapter.addItem(new MyItem("101112"));
 
         listView.setAdapter(adapter);
 /*
