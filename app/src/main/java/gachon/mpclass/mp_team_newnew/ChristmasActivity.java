@@ -18,11 +18,18 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ChristmasActivity extends AppCompatActivity {
     ImageButton heart;
     ImageView box;
     TextView edit_title;
 
+    RetrofitClient retrofitClient = new RetrofitClient();
+    Call<List<PostingForm>> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,33 @@ public class ChristmasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_christmas);
 
         ListView listView = findViewById(R.id.listview);
+
+        //db에서 가져오는 부분
+        String anniv  = "Christmas";
+        call = retrofitClient.retrofitService.getPostsByAnniversary(anniv);
+
+        //저장된 리스트
+        List<PostingForm> postingFormList = new ArrayList<>();
+
+        call.enqueue(new Callback<List<PostingForm>>() {
+            @Override
+            public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
+                for(PostingForm postingForm: response.body()) {
+                    postingFormList.add(postingForm);
+
+                    System.out.println(postingForm.toString());
+                    System.out.println("aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbb");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PostingForm>> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Log.d("tag4","실패" + t.getMessage());
+            }
+        });
+
+
         MyAdapter adapter = new MyAdapter();
 
         adapter.addItem(new MyItem("123"));
