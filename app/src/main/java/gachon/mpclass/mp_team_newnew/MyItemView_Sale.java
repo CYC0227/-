@@ -24,10 +24,10 @@ public class MyItemView_Sale extends LinearLayout {
         textView = findViewById(R.id.info);
         textView2 = findViewById(R.id.address);
     }
-    public void setId(String id){
-        textView.setText(id);
+    public void setInfo(String info){
+        textView.setText(info);
     }
-    public void setPhone(String phone){
-        textView2.setText(phone);
+    public void setAddress(String address){
+        textView2.setText(address);
     }
 }

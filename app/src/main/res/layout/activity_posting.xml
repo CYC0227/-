@@ -29,11 +29,11 @@
                     android:layout_height="117dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/posting_rec1" />
-                <ImageView
+                <ImageButton
                     android:id="@+id/plus_photo1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/add_photo"
+                    android:background="@drawable/add_photo"
                     android:layout_margin="16dp" />
 
 

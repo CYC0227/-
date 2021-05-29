@@ -2,6 +2,7 @@ package gachon.mpclass.mp_team_newnew;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ public class SalePostingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posting);
+        setContentView(R.layout.activity_sale_posting);
 
         // 뷰 참조
         listView = (ListView) findViewById(R.id.listview);
@@ -46,6 +47,7 @@ public class SalePostingActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 TodaySaleForm form = new TodaySaleForm();
 
                 form.setInfo(info.getText().toString());
@@ -71,6 +73,10 @@ public class SalePostingActivity extends AppCompatActivity {
                         Log.d("tag3","실패" + t.getMessage());
                     }
                 });
+
+                // 입력 완료 후 다시 동네특가 페이지로 이동
+                Intent myintent = new Intent(getApplicationContext(), SaleActivity.class);
+                startActivityForResult(myintent, 1);
             }
         });
 

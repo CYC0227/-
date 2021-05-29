@@ -18,6 +18,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
+        android:id="@+id/btn_address"
         android:layout_width="208dp"
         android:layout_height="41dp"
         android:background="@drawable/btn_search"
@@ -29,6 +30,7 @@
         app:layout_constraintVertical_bias="0.208" />
 
     <ImageButton
+        android:id="@+id/btn_inform"
         android:layout_width="113dp"
         android:layout_height="41dp"
         android:background="@drawable/btn_inform"
@@ -40,8 +42,8 @@
         app:layout_constraintVertical_bias="0.208" />
 
     <ScrollView
-        android:layout_width="410dp"
-        android:layout_height="481dp"
+        android:layout_width="416dp"
+        android:layout_height="207dp"
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
