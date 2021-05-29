@@ -5,6 +5,8 @@ import androidx.loader.content.CursorLoader;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
@@ -23,6 +25,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +35,12 @@ import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Multipart;
 
 public class PostingActivity extends AppCompatActivity {
@@ -109,35 +116,6 @@ public class PostingActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PostingForm form = new PostingForm();
-
-                // 추가된 ingredients 정보만큼 돌아야되는데 어떻게 하지?
-                form.setTitle(edt_title.getText().toString());
-                form.setInformation(information.getText().toString());
-                form.setDescription(description.getText().toString());
-
-                call = retrofitClient.retrofitService.setPostBody(form, session_email);
-
-                call.enqueue(new Callback<PostingForm>() {
-                    @Override
-                    public void onResponse(Call<PostingForm> call, Response<PostingForm> response) {
-                        if(response.isSuccessful()){
-                            PostingForm result = response.body();
-
-                            Log.d("tag1","성공" + result.toString());
-                        }
-                        else{
-                            Log.d("tag2","실패");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<PostingForm> call, Throwable t) {
-                        Log.d("tag3","실패" + t.getMessage());
-//서버와 통신가능하지만, 여러 수정필요
-                    }
-                });
-
                 //사진 업로드
                 String[] proj = { MediaStore.Images.Media.DATA };
                 CursorLoader loader = new CursorLoader(getApplicationContext(), filePath, proj, null, null, null);
@@ -179,6 +157,39 @@ public class PostingActivity extends AppCompatActivity {
                         Log.d("tag3","이미지 업로드 실패" + t.getMessage());
                     }
                 });
+
+
+                PostingForm form = new PostingForm();
+
+                // 추가된 ingredients 정보만큼 돌아야되는데 어떻게 하지?
+                form.setTitle(edt_title.getText().toString());
+                form.setInformation(information.getText().toString());
+                form.setDescription(description.getText().toString());
+                form.setImgURL(file.getName());
+
+                call = retrofitClient.retrofitService.setPostBody(form, session_email);
+
+                call.enqueue(new Callback<PostingForm>() {
+                    @Override
+                    public void onResponse(Call<PostingForm> call, Response<PostingForm> response) {
+                        if(response.isSuccessful()){
+                            PostingForm result = response.body();
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                        else{
+                            Log.d("tag2","실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostingForm> call, Throwable t) {
+                        Log.d("tag3","실패" + t.getMessage());
+//서버와 통신가능하지만, 여러 수정필요
+                    }
+                });
+
+
 //
 //                //intent (bundle로 싸서) - posting -> post
 //                // change form to string
@@ -234,6 +245,31 @@ public class PostingActivity extends AppCompatActivity {
 
 
                 //test
+
+
+                //test
+                Call<ResponseBody> callImageDown;
+                callImageDown = retrofitClient.retrofitService.downloadFile(file.getName());
+
+                callImageDown.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        InputStream is = response.body().byteStream();
+                        Bitmap bitmap = BitmapFactory.decodeStream(is);
+
+                        System.out.println("bitmap = " + bitmap);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("TAG", "Image download error: " + t.getLocalizedMessage());
+
+                    }
+                });
+
+                //test
+
+
             }
         });
 
