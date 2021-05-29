@@ -79,9 +79,10 @@ public class ChristmasActivity extends AppCompatActivity {
         postingFormList.add(post3);
 
         MyAdapter adapter = new MyAdapter();
-        adapter.addItem(new MyItem(postingFormList.get(0).getTitle(),postingFormList.get(0).getImgURL(),postingFormList.get(0).getDescription(),postingFormList.get(0).getIngredients_name(),postingFormList.get(0).getIngredients_quantity(),postingFormList.get(0).getAnniversary(),postingFormList.get(0).getCountry(),postingFormList.get(0).getVideoURL()));
-        adapter.addItem(new MyItem(postingFormList.get(1).getTitle(),postingFormList.get(1).getImgURL(),postingFormList.get(1).getDescription(),postingFormList.get(1).getIngredients_name(),postingFormList.get(1).getIngredients_quantity(),postingFormList.get(1).getAnniversary(),postingFormList.get(1).getCountry(),postingFormList.get(1).getVideoURL()));
-        adapter.addItem(new MyItem(postingFormList.get(2).getTitle(),postingFormList.get(2).getImgURL(),postingFormList.get(2).getDescription(),postingFormList.get(2).getIngredients_name(),postingFormList.get(2).getIngredients_quantity(),postingFormList.get(2).getAnniversary(),postingFormList.get(2).getCountry(),postingFormList.get(2).getVideoURL()));
+
+        adapter.addItems(postingFormList);
+
+
 
         listView.setAdapter(adapter);
 
@@ -108,20 +109,19 @@ public class ChristmasActivity extends AppCompatActivity {
 
     }
     class MyAdapter extends BaseAdapter {
-        private ArrayList<MyItem> items = new ArrayList<>();
+        private List<PostingForm> adapterPostingForms = new ArrayList<>();
 
-        public void addItem(MyItem item) {
-            items.add(item);
+        public void addItems(List<PostingForm> postingFormList){
+            this.adapterPostingForms = postingFormList;
         }
-
         @Override
         public int getCount() {
-            return items.size();
+            return adapterPostingForms.size();
         }
 
         @Override
-        public MyItem getItem(int position) {
-            return items.get(position);
+        public PostingForm getItem(int position) {
+            return adapterPostingForms.get(position);
         }
 
         @Override
@@ -132,8 +132,9 @@ public class ChristmasActivity extends AppCompatActivity {
         @Override
         public View getView(final int position, final View convertView, ViewGroup parent) {
             MyItemView view = new MyItemView(getApplicationContext());
-            MyItem item = items.get(position);
-            view.setId(item.getId());
+
+            PostingForm form = adapterPostingForms.get(position);
+            view.setId(form.getTitle());
             return view;
         }
    }
