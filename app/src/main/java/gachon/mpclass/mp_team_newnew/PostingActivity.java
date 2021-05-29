@@ -1,12 +1,15 @@
 package gachon.mpclass.mp_team_newnew;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,14 +139,25 @@ public class PostingActivity extends AppCompatActivity {
                 });
 
                 //사진 업로드
+                String[] proj = { MediaStore.Images.Media.DATA };
+                CursorLoader loader = new CursorLoader(getApplicationContext(), filePath, proj, null, null, null);
+                Cursor cursor = loader.loadInBackground();
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+                String result = cursor.getString(column_index);
+                cursor.close();
 
-                // Uri 타입의 파일경로를 가지는 RequestBody 객체 생성
-                RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), Uri filePath);
 
-                //RequestBody로 Multipart.Part 객체 생성
-                MultipartBody.Part filePart = Multipart.Part.createFormData("photo", "photo.jpg", fileBody);
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-                callPic = retrofitClient.retrofitService.uploadFile(filePart);
+//                File file = new File(filePath.getPath());
+                File file = new File(result);
+
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+
+                callPic = retrofitClient.retrofitService.uploadFile(body);
 
 
                 callPic.enqueue(new Callback<FileUploadResponse>() {
@@ -150,6 +165,7 @@ public class PostingActivity extends AppCompatActivity {
                     public void onResponse(Call<FileUploadResponse> call, Response<FileUploadResponse> response) {
                         if(response.isSuccessful()){
                             FileUploadResponse result = response.body();
+
 
                             Log.d("tag1","성공" + result.toString());
                         }
@@ -160,7 +176,7 @@ public class PostingActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<FileUploadResponse> call, Throwable t) {
-                        Log.d("tag3","실패" + t.getMessage());
+                        Log.d("tag3","이미지 업로드 실패" + t.getMessage());
                     }
                 });
 //
