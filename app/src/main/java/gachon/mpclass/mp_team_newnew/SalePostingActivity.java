@@ -48,35 +48,36 @@ public class SalePostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                TodaySaleForm form = new TodaySaleForm();
+//                TodaySaleForm form = new TodaySaleForm();
+//
+//                form.setInfo(info.getText().toString());
+//                form.setAddress(address.getText().toString());
+//
+//                call = retrofitClient.retrofitService.postTodaySale(form);
+//
+//                call.enqueue(new Callback<TodaySaleForm>() {
+//                    @Override
+//                    public void onResponse(Call<TodaySaleForm> call, Response<TodaySaleForm> response) {
+//                        if(response.isSuccessful()){
+//                            TodaySaleForm result = response.body();
+//
+//                            Log.d("tag1","성공" + result.toString());
+//                        }
+//                        else{
+//                            Log.d("tag2","실패");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<TodaySaleForm> call, Throwable t) {
+//                        Log.d("tag3","실패" + t.getMessage());
+//                    }
+//                });
 
-                form.setInfo(info.getText().toString());
-                form.setAddress(address.getText().toString());
-
-                call = retrofitClient.retrofitService.postTodaySale(form);
-
-                call.enqueue(new Callback<TodaySaleForm>() {
-                    @Override
-                    public void onResponse(Call<TodaySaleForm> call, Response<TodaySaleForm> response) {
-                        if(response.isSuccessful()){
-                            TodaySaleForm result = response.body();
-
-                            Log.d("tag1","성공" + result.toString());
-                        }
-                        else{
-                            Log.d("tag2","실패");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<TodaySaleForm> call, Throwable t) {
-                        Log.d("tag3","실패" + t.getMessage());
-                    }
-                });
-
-                // 입력 완료 후 다시 동네특가 페이지로 이동
-                Intent myintent = new Intent(getApplicationContext(), SaleActivity.class);
-                startActivityForResult(myintent, 1);
+//                // 입력 완료 후 다시 동네특가 페이지로 이동
+                finish();
+//                Intent myintent = new Intent(getApplicationContext(), SaleActivity.class);
+//                startActivityForResult(myintent, 1);
             }
         });
 

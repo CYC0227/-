@@ -3,8 +3,11 @@ package gachon.mpclass.mp_team_newnew;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -39,7 +43,11 @@ public class PostingActivity extends AppCompatActivity {
     private EditText edt_sub;
     private ImageButton btn_add;
     private ImageButton btn_submit;
+    private ImageView btn_photo;
 
+    private Uri filePath;
+
+    private final int GET_GALLERY_IMAGE = 200; // 사진 가져오기 위해 쓰인 코드
     public static String session_email = "kevin";//로그인 되는 순간 생성되야함. LoginActivity로 이동 필요
 
     RetrofitClient retrofitClient = new RetrofitClient();
@@ -65,10 +73,20 @@ public class PostingActivity extends AppCompatActivity {
         btn_add = (ImageButton) findViewById(R.id.plus);
         listView = (ListView) findViewById(R.id.listview);
         btn_submit = (ImageButton) findViewById(R.id.submit);
-
+        btn_photo = (ImageView) findViewById(R.id.plus_photo1) ;
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
         main_title = (EditText) findViewById(R.id.title);
+
+        // 대문 사진 선택하기 (갤러리 접근)
+        btn_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
+            }
+        });
 
         adapter = new ListAdapter(PostingActivity.this);
         listView.setAdapter(adapter);
@@ -104,28 +122,27 @@ public class PostingActivity extends AppCompatActivity {
 
                             Log.d("tag1","성공" + result.toString());
                         }
-                            else{
-                                Log.d("tag2","실패");
-                            }
+                        else{
+                            Log.d("tag2","실패");
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<PostingForm> call, Throwable t) {
-                    Log.d("tag3","실패" + t.getMessage());
+                        Log.d("tag3","실패" + t.getMessage());
 //서버와 통신가능하지만, 여러 수정필요
-                  }
+                    }
                 });
 
                 //사진 업로드
 
                 // Uri 타입의 파일경로를 가지는 RequestBody 객체 생성
-//                Uri filePath = new Uri();
-//                RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), Uri filePath);
-//
-//// RequestBody로 Multipart.Part 객체 생성
-//                MultipartBody.Part filePart = Multipart.Part.createFormData("photo", "photo.jpg", fileBody);
-//
-//                callPic = retrofitClient.retrofitService.uploadFile(filePart);
+                RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), Uri filePath);
+
+                //RequestBody로 Multipart.Part 객체 생성
+                MultipartBody.Part filePart = Multipart.Part.createFormData("photo", "photo.jpg", fileBody);
+
+                callPic = retrofitClient.retrofitService.uploadFile(filePart);
 
 
                 callPic.enqueue(new Callback<FileUploadResponse>() {
@@ -206,5 +223,19 @@ public class PostingActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri selectedImageUri = data.getData();
+            filePath = selectedImageUri;
+            btn_photo.setImageURI(selectedImageUri);
+            btn_photo.setBackgroundColor(00000000);
+
+        }
+
+    }
 
 }
