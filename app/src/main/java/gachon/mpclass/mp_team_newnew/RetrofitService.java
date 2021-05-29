@@ -17,6 +17,12 @@ public interface RetrofitService {
     @GET("postings/postingList")// postings/postingList?email = email_string
     Call<List<PostingForm>> getPosts(@Query("email") String email);
 
+    @GET("postings/postingList/country")
+    Call<List<PostingForm>> getPostsByCountry(@Query("country") String country);
+
+    @GET("postings/postingList/anniv")
+    Call<List<PostingForm>> getPostsByAnniversary(@Query("anniv") String anniv);
+
     @POST("postings/new")
     Call<PostingForm> setPostBody(@Body PostingForm post, @Query("email") String email);
 
