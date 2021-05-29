@@ -3,13 +3,17 @@ package gachon.mpclass.mp_team_newnew;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SalePostingActivity extends AppCompatActivity {
     private ListView listView;
@@ -37,13 +41,36 @@ public class SalePostingActivity extends AppCompatActivity {
         address = (EditText) findViewById(R.id.edit_information);
         info = (EditText) findViewById(R.id.edit_description);
 
+
+
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TodaySaleForm form = new TodaySaleForm();
 
-                form.setInformation(address.getText().toString());
-                form.setDescription(info.getText().toString());
+                form.setInfo(info.getText().toString());
+                form.setAddress(address.getText().toString());
+
+                call = retrofitClient.retrofitService.postTodaySale(form);
+
+                call.enqueue(new Callback<TodaySaleForm>() {
+                    @Override
+                    public void onResponse(Call<TodaySaleForm> call, Response<TodaySaleForm> response) {
+                        if(response.isSuccessful()){
+                            TodaySaleForm result = response.body();
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                        else{
+                            Log.d("tag2","실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TodaySaleForm> call, Throwable t) {
+                        Log.d("tag3","실패" + t.getMessage());
+                    }
+                });
             }
         });
 
