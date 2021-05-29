@@ -119,13 +119,13 @@ public class PostingActivity extends AppCompatActivity {
                 //사진 업로드
 
                 // Uri 타입의 파일경로를 가지는 RequestBody 객체 생성
-                Uri filePath = new Uri();
-                RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), Uri filePath);
+//                Uri filePath = new Uri();
+//                RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), Uri filePath);
 
 // RequestBody로 Multipart.Part 객체 생성
-                MultipartBody.Part filePart = Multipart.Part.createFormData("photo", "photo.jpg", fileBody);
+//                MultipartBody.Part filePart = Multipart.Part.createFormData("photo", "photo.jpg", fileBody);
 
-                callPic = retrofitClient.retrofitService.uploadFile(filePart);
+//                callPic = retrofitClient.retrofitService.uploadFile(filePart);
 
 
                 callPic.enqueue(new Callback<FileUploadResponse>() {

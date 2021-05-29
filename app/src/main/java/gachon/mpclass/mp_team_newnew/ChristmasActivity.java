@@ -51,8 +51,6 @@ public class ChristmasActivity extends AppCompatActivity {
                 for(PostingForm postingForm: response.body()) {
                     postingFormList.add(postingForm);
 
-                    System.out.println(postingForm.toString());
-                    System.out.println("aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbb");
                 }
             }
 
