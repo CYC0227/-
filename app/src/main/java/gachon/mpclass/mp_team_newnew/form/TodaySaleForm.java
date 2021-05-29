@@ -11,6 +11,21 @@ public class TodaySaleForm {
     private String country;
     private String videoURL;
 
+    @Override
+    public String toString() {
+        return "TodaySaleForm{" +
+                "imgURL='" + imgURL + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", information='" + information + '\'' +
+                ", ingredients_name='" + ingredients_name + '\'' +
+                ", ingredients_quantity='" + ingredients_quantity + '\'' +
+                ", anniversary='" + anniversary + '\'' +
+                ", country='" + country + '\'' +
+                ", videoURL='" + videoURL + '\'' +
+                '}';
+    }
+
     public String getImgURL() {
         return imgURL;
     }
@@ -81,19 +96,5 @@ public class TodaySaleForm {
 
     public void setVideoURL(String videoURL) {
         this.videoURL = videoURL;
-    }
-
-    @Override
-    public String toString() {
-        return "SaleForm{" +
-                "imgURL='" + imgURL + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", information='" + information + '\'' +
-                ", ingredients_name='" + ingredients_name + '\'' +
-                ", ingredients_quantity='" + ingredients_quantity + '\'' +
-                ", anniversary='" + anniversary + '\'' +
-                ", country='" + country + '\'' +
-                '}';
     }
 }
