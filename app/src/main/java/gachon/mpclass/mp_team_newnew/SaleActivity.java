@@ -14,11 +14,13 @@ public class SaleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //어댑터
+        ListView listView = findViewById(R.id.lv_comment_view);
+
         setContentView(R.layout.activity_sale);
     }
 
-    //어댑터
-    ListView listView = findViewById(R.id.lv_comment_view);
 
     class MyAdapter extends BaseAdapter {
         private ArrayList<MyItem> items = new ArrayList<>();

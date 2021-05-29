@@ -3,6 +3,7 @@ package gachon.mpclass.mp_team_newnew;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +18,15 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import gachon.mpclass.mp_team_newnew.form.FileUploadResponse;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Multipart;
 
 public class PostingActivity extends AppCompatActivity {
     private ListView listView;
@@ -39,6 +45,7 @@ public class PostingActivity extends AppCompatActivity {
     RetrofitClient retrofitClient = new RetrofitClient();
 
     Call<PostingForm> call;
+    Call<FileUploadResponse> callPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +114,37 @@ public class PostingActivity extends AppCompatActivity {
                     Log.d("tag3","실패" + t.getMessage());
 //서버와 통신가능하지만, 여러 수정필요
                   }
+                });
+
+                //사진 업로드
+
+                // Uri 타입의 파일경로를 가지는 RequestBody 객체 생성
+                Uri filePath = new Uri();
+                RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), Uri filePath);
+
+// RequestBody로 Multipart.Part 객체 생성
+                MultipartBody.Part filePart = Multipart.Part.createFormData("photo", "photo.jpg", fileBody);
+
+                callPic = retrofitClient.retrofitService.uploadFile(filePart);
+
+
+                callPic.enqueue(new Callback<FileUploadResponse>() {
+                    @Override
+                    public void onResponse(Call<FileUploadResponse> call, Response<FileUploadResponse> response) {
+                        if(response.isSuccessful()){
+                            FileUploadResponse result = response.body();
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                        else{
+                            Log.d("tag2","실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FileUploadResponse> call, Throwable t) {
+                        Log.d("tag3","실패" + t.getMessage());
+                    }
                 });
 //
 //                //intent (bundle로 싸서) - posting -> post
