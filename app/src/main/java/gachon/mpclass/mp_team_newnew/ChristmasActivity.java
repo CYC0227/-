@@ -26,10 +26,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChristmasActivity extends AppCompatActivity {
+public class ChristmasActivity extends AppCompatActivity implements View.OnClickListener   {
     ImageButton heart;
     ImageView box;
     TextView edit_title;
+    private ArrayList<MyrecipeItem> data = null;
 
     RetrofitClient retrofitClient = new RetrofitClient();
     Call<List<PostingForm>> call;
@@ -96,26 +97,43 @@ public class ChristmasActivity extends AppCompatActivity {
 //        });
 
 
-        PostingForm post2 = new PostingForm();
-        post2.setTitle("hello2");
-        postingFormList.add(post2);
+//        PostingForm post2 = new PostingForm();
+//        post2.setTitle("hello2");
+//        postingFormList.add(post2);
+//
+//        PostingForm post3 = new PostingForm();
+//        post3.setTitle("hello3");
+//        postingFormList.add(post3);
 
-        PostingForm post3 = new PostingForm();
-        post3.setTitle("hello3");
-        postingFormList.add(post3);
 
-        MyAdapter adapter = new MyAdapter();
+        data = new ArrayList<>();
 
-        adapter.addItems(postingFormList);
+        MyrecipeItem item1 = new MyrecipeItem(R.drawable.chicken, "title", "야채썰고 볶는다.", "3", "양파","1", "christmas", "India");
+        MyrecipeItem item2 = new MyrecipeItem(R.drawable.chicken, "title2","야채썰고 볶는다2.", "2", "양파2","1.5", "christmas", "India");
+
+        data.add(item1);
+        data.add(item2);
+
+        MyrecipeAdapter adapter = new MyrecipeAdapter(this, R.layout.myrecipe_item, data);
 
         listView.setAdapter(adapter);
 
+        /* 아이템 클릭시 작동 */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), postingFormList.get(position).getTitle(), Toast.LENGTH_LONG).show();
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
 
-                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
+                /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
+                intent.putExtra("profile", Integer.toString(data.get(position).getProfile()));
+                intent.putExtra("title", data.get(position).getTitle());
+                intent.putExtra("description", data.get(position).getDescription());
+                intent.putExtra("information", data.get(position).getInformation());
+                intent.putExtra("ingredients_name", data.get(position).getIngredients_name());
+                intent.putExtra("ingredients_quantity", data.get(position).getIngredients_quantity());
+                intent.putExtra("anniversary", data.get(position).getAnniversary());
+                intent.putExtra("country", data.get(position).getCountry());
+
                 startActivity(intent);
             }
         });
@@ -132,34 +150,39 @@ public class ChristmasActivity extends AppCompatActivity {
 
 
     }
-    class MyAdapter extends BaseAdapter {
-        private List<PostingForm> adapterPostingForms = new ArrayList<>();
 
-        public void addItems(List<PostingForm> postingFormList){
-            this.adapterPostingForms = postingFormList;
-        }
-        @Override
-        public int getCount() {
-            return adapterPostingForms.size();
-        }
+    @Override
+    public void onClick(View v) {
+    }
 
-        @Override
-        public PostingForm getItem(int position) {
-            return adapterPostingForms.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, final View convertView, ViewGroup parent) {
-            MyItemView view = new MyItemView(getApplicationContext());
-
-            PostingForm form = adapterPostingForms.get(position);
-            view.setId(form.getTitle());
-            return view;
-        }
-   }
+//    class MyAdapter extends BaseAdapter {
+//        private List<PostingForm> adapterPostingForms = new ArrayList<>();
+//
+//        public void addItems(List<PostingForm> postingFormList){
+//            this.adapterPostingForms = postingFormList;
+//        }
+//        @Override
+//        public int getCount() {
+//            return adapterPostingForms.size();
+//        }
+//
+//        @Override
+//        public PostingForm getItem(int position) {
+//            return adapterPostingForms.get(position);
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//
+//        @Override
+//        public View getView(final int position, final View convertView, ViewGroup parent) {
+//            MyItemView view = new MyItemView(getApplicationContext());
+//
+//            PostingForm form = adapterPostingForms.get(position);
+//            view.setId(form.getTitle());
+//            return view;
+//        }
+//   }
 }

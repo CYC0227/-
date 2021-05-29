@@ -3,6 +3,7 @@ package gachon.mpclass.mp_team_newnew.form;
 
 public class PostingForm {
 
+    private int img;
     private String imgURL;
     private String title;
     private String description;
@@ -12,6 +13,14 @@ public class PostingForm {
     private String anniversary;
     private String country;
     private String videoURL;
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
 
     public String getImgURL() {
         return imgURL;
