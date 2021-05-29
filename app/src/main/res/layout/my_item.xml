@@ -23,13 +23,13 @@
             android:layout_margin="14dp"
             android:background="@drawable/insta_heart" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="72dp"
-        android:layout_height="55dp"
-        android:layout_margin="10dp"
-        android:text="Tltle"
-        android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="305dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:text="Title"
+            android:textSize="30dp" />
     </LinearLayout>
 
 </LinearLayout>

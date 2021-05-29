@@ -1,15 +1,18 @@
 package gachon.mpclass.mp_team_newnew;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,14 +65,36 @@ public class ChristmasActivity extends AppCompatActivity {
         });
 
 
-        MyAdapter adapter = new MyAdapter();
 
-        adapter.addItem(new MyItem("123"));
-        adapter.addItem(new MyItem("456"));
-        adapter.addItem(new MyItem("789"));
-        adapter.addItem(new MyItem("101112"));
+        PostingForm post1 = new PostingForm();
+        post1.setTitle("hello");
+        postingFormList.add(post1);
+
+        PostingForm post2 = new PostingForm();
+        post2.setTitle("hello2");
+        postingFormList.add(post2);
+
+        PostingForm post3 = new PostingForm();
+        post3.setTitle("hello3");
+        postingFormList.add(post3);
+
+        MyAdapter adapter = new MyAdapter();
+        adapter.addItem(new MyItem(postingFormList.get(0).getTitle(),postingFormList.get(0).getImgURL(),postingFormList.get(0).getDescription(),postingFormList.get(0).getIngredients_name(),postingFormList.get(0).getIngredients_quantity(),postingFormList.get(0).getAnniversary(),postingFormList.get(0).getCountry(),postingFormList.get(0).getVideoURL()));
+        adapter.addItem(new MyItem(postingFormList.get(1).getTitle(),postingFormList.get(1).getImgURL(),postingFormList.get(1).getDescription(),postingFormList.get(1).getIngredients_name(),postingFormList.get(1).getIngredients_quantity(),postingFormList.get(1).getAnniversary(),postingFormList.get(1).getCountry(),postingFormList.get(1).getVideoURL()));
+        adapter.addItem(new MyItem(postingFormList.get(2).getTitle(),postingFormList.get(2).getImgURL(),postingFormList.get(2).getDescription(),postingFormList.get(2).getIngredients_name(),postingFormList.get(2).getIngredients_quantity(),postingFormList.get(2).getAnniversary(),postingFormList.get(2).getCountry(),postingFormList.get(2).getVideoURL()));
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), postingFormList.get(position).getTitle(), Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
+                startActivity(intent);
+            }
+        });
+
 /*
         // 하트 누르기
         heart = (ImageButton) findViewById(R.id.heart);
@@ -81,35 +106,7 @@ public class ChristmasActivity extends AppCompatActivity {
         });*/
 
 
-/*
-//        // 유저들의 list 가져오기
-//        List<Posting> postings = new ArrayList<>();
-//        postings.getId();
-        box = findViewById(R.id.box);
-        edit_title = findViewById(R.id.edit_title);
-
-        //그저 테스트용
-        List<String> a = new ArrayList();
-        a.add("abc");
-        a.add("def");
-
-        for (int i=0; i<2; i++){
-            box.setImageResource(R.drawable.insta_box);
-            heart.setImageResource(R.drawable.insta_heart);
-            //edit_title.setText(a.get(i));
-            edit_title.setText("abc");
-        }
-
-
-//        // posting에 있는 유저 수만큼 인스타그램 보여주기
-//        for (int i=0; i<postings.size(); i++){
-//            box.setImageResource(R.drawable.insta_box);
-//            heart.setImageResource(R.drawable.insta_heart);
-//            edit_title.setText(postings.getTitle(i));
-//        }*/
-
     }
-
     class MyAdapter extends BaseAdapter {
         private ArrayList<MyItem> items = new ArrayList<>();
 
@@ -139,5 +136,5 @@ public class ChristmasActivity extends AppCompatActivity {
             view.setId(item.getId());
             return view;
         }
-    }
+   }
 }
