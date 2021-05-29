@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
@@ -49,7 +52,6 @@ public class PostingActivity extends AppCompatActivity {
         Spinner spi_country = findViewById(R.id.spinner_country);
         //final String kind_country = spi_country.getSelectedItem().toString();
 
-
         // 뷰 참조
         edt_title = (EditText) findViewById(R.id.edit_ingredients);
         edt_sub = (EditText) findViewById(R.id.edit_ingredients_num);
@@ -61,8 +63,6 @@ public class PostingActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.edit_description);
         main_title = (EditText) findViewById(R.id.title);
 
-
-
         adapter = new ListAdapter(PostingActivity.this);
         listView.setAdapter(adapter);
 
@@ -71,11 +71,9 @@ public class PostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
-                edt_title.setText("");
-                edt_sub.setText("");
 
-                adapter.notifyDataSetChanged();
-
+                edt_title.setText(edt_title.getText().toString());
+                edt_sub.setText(edt_sub.getText().toString());
             }
         });
 
@@ -83,12 +81,13 @@ public class PostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 PostingForm form = new PostingForm();
+
+                // 추가된 ingredients 정보만큼 돌아야되는데 어떻게 하지?
                 form.setTitle(edt_title.getText().toString());
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
 
                 call = retrofitClient.retrofitService.setPostBody(form, session_email);
-
 
                 call.enqueue(new Callback<PostingForm>() {
                     @Override
@@ -102,7 +101,6 @@ public class PostingActivity extends AppCompatActivity {
                                 Log.d("tag2","실패");
                             }
                     }
-
 
                     @Override
                     public void onFailure(Call<PostingForm> call, Throwable t) {
@@ -169,5 +167,6 @@ public class PostingActivity extends AppCompatActivity {
         });
 
     }
+
 
 }

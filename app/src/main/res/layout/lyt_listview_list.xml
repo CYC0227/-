@@ -37,12 +37,5 @@
         android:paddingBottom="7dp"
         android:paddingLeft="7dp"
         android:background="@drawable/shape2"/>
-        <ImageButton
-            android:id="@+id/plus"
-            android:layout_width="14dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/x"
-            app:srcCompat="@drawable/plus_button" />
     </LinearLayout>
 </LinearLayout>
