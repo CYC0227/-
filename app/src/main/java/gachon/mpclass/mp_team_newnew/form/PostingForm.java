@@ -9,17 +9,16 @@ public class PostingForm {
     private String information;
     private String ingredients_name;
     private String ingredients_quantity;
+    private String anniversary;
+    private String country;
+    private String videoURL;
 
-    @Override
-    public String toString() {
-        return "PostingForm{" +
-                ", imgURL='" + imgURL + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", information='" + information + '\'' +
-                ", ingredients_name='" + ingredients_name + '\'' +
-                ", ingredients_quantity='" + ingredients_quantity + '\'' +
-                '}';
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public String getTitle() {
@@ -28,14 +27,6 @@ public class PostingForm {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getImgURL() {
-        return imgURL;
-    }
-
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
     }
 
     public String getDescription() {
@@ -68,5 +59,43 @@ public class PostingForm {
 
     public void setIngredients_quantity(String ingredients_quantity) {
         this.ingredients_quantity = ingredients_quantity;
+    }
+
+    public String getAnniversary() {
+        return anniversary;
+    }
+
+    public void setAnniversary(String anniversary) {
+        this.anniversary = anniversary;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getVideoURL() {
+        return videoURL;
+    }
+
+    public void setVideoURL(String videoURL) {
+        this.videoURL = videoURL;
+    }
+
+    @Override
+    public String toString() {
+        return "PostingForm{" +
+                "imgURL='" + imgURL + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", information='" + information + '\'' +
+                ", ingredients_name='" + ingredients_name + '\'' +
+                ", ingredients_quantity='" + ingredients_quantity + '\'' +
+                ", anniversary='" + anniversary + '\'' +
+                ", country='" + country + '\'' +
+                '}';
     }
 }
