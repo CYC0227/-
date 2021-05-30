@@ -60,6 +60,10 @@ public class MyrecipeAdapter extends BaseAdapter {
 
         ImageView heart = (ImageView) convertView.findViewById(R.id.heart);
 
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
         return convertView;
     }
 }

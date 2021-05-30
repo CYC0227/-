@@ -115,6 +115,8 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
 
+                System.out.println("111111111112222222222222222333333333333344444444444444444444444444444444");
+
                 /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
                 intent.putExtra("imgURL", imgList.get(position));
                 intent.putExtra("title", postingFormList.get(position).getTitle());

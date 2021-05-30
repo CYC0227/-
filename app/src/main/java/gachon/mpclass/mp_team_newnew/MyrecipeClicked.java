@@ -20,7 +20,7 @@ public class MyrecipeClicked extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        ImageView profile = (ImageView) findViewById(R.id.img_prof);
+        ImageView imgURL = (ImageView) findViewById(R.id.img_prof);
         TextView view_title=(TextView) findViewById(R.id.title);
         TextView day=(TextView) findViewById(R.id.text_kind_day);
         TextView kind=(TextView) findViewById(R.id.text_kind_country);
@@ -29,7 +29,8 @@ public class MyrecipeClicked extends AppCompatActivity {
         TextView ing_num=(TextView) findViewById(R.id.edit_ingredients_num);
         TextView ing_name=(TextView) findViewById(R.id.edit_ingredients);
 
-        profile.setImageBitmap(intent.getParcelableExtra("profile"));
+
+        imgURL.setImageBitmap(intent.getParcelableExtra("imgURL"));
         view_title.setText(intent.getStringExtra("title"));
         day.setText(intent.getStringExtra("anniversary"));
         kind.setText(intent.getStringExtra("country"));
