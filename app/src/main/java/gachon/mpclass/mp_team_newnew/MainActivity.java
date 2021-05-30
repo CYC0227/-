@@ -265,6 +265,6 @@ public class MainActivity extends AppCompatActivity {
         gpsTracker.startLocationService();
         weatherAPI.callCurrentWeather(GpsTracker.latitude, GpsTracker.longitude);
         ImageView recommend = findViewById(R.id.recommend_picture);
-        // recommend.setImageResource(R.drawable.rain); <- 이 부분만 수정하여 결과 바꾸면 될 듯
+        recommend.setImageResource(R.drawable.rain);
     }
 }
