@@ -1,6 +1,8 @@
 package gachon.mpclass.mp_team_newnew;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -9,7 +11,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MyrecipeClicked extends AppCompatActivity {
-    private int img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +29,7 @@ public class MyrecipeClicked extends AppCompatActivity {
         TextView ing_num=(TextView) findViewById(R.id.edit_ingredients_num);
         TextView ing_name=(TextView) findViewById(R.id.edit_ingredients);
 
-
-        img=Integer.parseInt(intent.getStringExtra("profile"));
-        profile.setImageResource(img);
+        profile.setImageBitmap(intent.getParcelableExtra("profile"));
         view_title.setText(intent.getStringExtra("title"));
         day.setText(intent.getStringExtra("anniversary"));
         kind.setText(intent.getStringExtra("country"));

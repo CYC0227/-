@@ -1,6 +1,8 @@
 package gachon.mpclass.mp_team_newnew;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.w3c.dom.Text;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +34,9 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
     ImageButton heart;
     ImageView box;
     TextView edit_title;
-    private ArrayList<MyrecipeItem> data = null;
+    private ArrayList<PostingForm> data = null;
+
+    List<Bitmap> imgList = new ArrayList<>();
 
     RetrofitClient retrofitClient = new RetrofitClient();
     Call<List<PostingForm>> call;
@@ -66,55 +72,34 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
         });
 
 
-//
-//        PostingForm post1 = new PostingForm();
-//        post1.setTitle("hello");
-//        postingFormList.add(post1);
-//
-//        PostingForm post2 = new PostingForm();
-//        post2.setTitle("hello2");
-//        postingFormList.add(post2);
-//
-//        PostingForm post3 = new PostingForm();
-//        post3.setTitle("hello3");
-//        postingFormList.add(post3);
-//
-//        MyAdapter adapter = new MyAdapter();
-//        adapter.addItem(new MyItem(postingFormList.get(0).getTitle(),postingFormList.get(0).getImgURL(),postingFormList.get(0).getDescription(),postingFormList.get(0).getIngredients_name(),postingFormList.get(0).getIngredients_quantity(),postingFormList.get(0).getAnniversary(),postingFormList.get(0).getCountry(),postingFormList.get(0).getVideoURL()));
-//        adapter.addItem(new MyItem(postingFormList.get(1).getTitle(),postingFormList.get(1).getImgURL(),postingFormList.get(1).getDescription(),postingFormList.get(1).getIngredients_name(),postingFormList.get(1).getIngredients_quantity(),postingFormList.get(1).getAnniversary(),postingFormList.get(1).getCountry(),postingFormList.get(1).getVideoURL()));
-//        adapter.addItem(new MyItem(postingFormList.get(2).getTitle(),postingFormList.get(2).getImgURL(),postingFormList.get(2).getDescription(),postingFormList.get(2).getIngredients_name(),postingFormList.get(2).getIngredients_quantity(),postingFormList.get(2).getAnniversary(),postingFormList.get(2).getCountry(),postingFormList.get(2).getVideoURL()));
-//
-//        listView.setAdapter(adapter);
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(), postingFormList.get(position).getTitle(), Toast.LENGTH_LONG).show();
-//
-//                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+//image download
 
+        for (PostingForm postingForm: postingFormList) {
+            String img = postingForm.getImgURL();
 
-//        PostingForm post2 = new PostingForm();
-//        post2.setTitle("hello2");
-//        postingFormList.add(post2);
-//
-//        PostingForm post3 = new PostingForm();
-//        post3.setTitle("hello3");
-//        postingFormList.add(post3);
+            Call<ResponseBody> callImageDown;
+            callImageDown = retrofitClient.retrofitService.downloadFile(img);
 
+            callImageDown.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    InputStream is = response.body().byteStream();
+                    Bitmap bitmap = BitmapFactory.decodeStream(is);
 
-        data = new ArrayList<>();
+                    imgList.add(bitmap);
+                    System.out.println("bitmap = " + bitmap);
+                }
 
-        MyrecipeItem item1 = new MyrecipeItem(R.drawable.chicken, "title", "야채썰고 볶는다.", "3", "양파","1", "christmas", "India");
-        MyrecipeItem item2 = new MyrecipeItem(R.drawable.chicken, "title2","야채썰고 볶는다2.", "2", "양파2","1.5", "christmas", "India");
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("TAG", "Image download error: " + t.getLocalizedMessage());
 
-        data.add(item1);
-        data.add(item2);
+                }
+            });
 
-        MyrecipeAdapter adapter = new MyrecipeAdapter(this, R.layout.myrecipe_item, data);
+        }
+
+        MyrecipeAdapter adapter = new MyrecipeAdapter(this, R.layout.myrecipe_item, postingFormList, imgList);
 
         listView.setAdapter(adapter);
 
@@ -125,15 +110,15 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
 
                 /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
-                intent.putExtra("profile", Integer.toString(data.get(position).getProfile()));
-                intent.putExtra("title", data.get(position).getTitle());
-                intent.putExtra("description", data.get(position).getDescription());
-                intent.putExtra("information", data.get(position).getInformation());
-                intent.putExtra("ingredients_name", data.get(position).getIngredients_name());
-                intent.putExtra("ingredients_quantity", data.get(position).getIngredients_quantity());
-                intent.putExtra("anniversary", data.get(position).getAnniversary());
-                intent.putExtra("country", data.get(position).getCountry());
-
+                intent.putExtra("imgURL", imgList.get(position));
+                intent.putExtra("title", postingFormList.get(position).getTitle());
+                intent.putExtra("description", postingFormList.get(position).getDescription());
+                intent.putExtra("information", postingFormList.get(position).getInformation());
+                intent.putExtra("ingredients_name", postingFormList.get(position).getIngredients_name());
+                intent.putExtra("ingredients_quantity", postingFormList.get(position).getIngredients_quantity());
+                intent.putExtra("anniversary", postingFormList.get(position).getAnniversary());
+                intent.putExtra("country", postingFormList.get(position).getCountry());
+                intent.putExtra("videoURL", postingFormList.get(position).getVideoURL());
                 startActivity(intent);
             }
         });
