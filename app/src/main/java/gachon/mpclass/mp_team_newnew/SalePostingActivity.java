@@ -11,23 +11,21 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SalePostingActivity extends AppCompatActivity {
-    private ListView listView;
-    private ListAdapter adapter;
     private EditText info;
-    private TextView address;
+    private TextView address_store;
 
     private ImageButton btn_save;
 
     public static String session_email = "kevin";//로그인 되는 순간 생성되야함. LoginActivity로 이동 필요
+
+    private String address;
+    private String address_round;
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -38,18 +36,27 @@ public class SalePostingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_posting);
 
-        // 뷰 참조
-        listView = (ListView) findViewById(R.id.listview);
+        Intent intent = getIntent();    // address, address_around 받아옴
+
+        address = intent.getStringExtra("address");
+        address_round = intent.getStringExtra("address_around");
+        
         btn_save = (ImageButton) findViewById(R.id.submit);
 
-        address = (TextView) findViewById(R.id.edit_address);        // address 누르면, 가게 주소 가져오게 함
+        address_store = (TextView) findViewById(R.id.edit_address);        // address 누르면, 가게 주소 가져오게 함
         info = (EditText) findViewById(R.id.edit_description);
 
-        address.setOnClickListener(new View.OnClickListener(){
+        address_store.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                // TextView 클릭될 시 할 코드작성 ( 지도 띄워서 사용자가 가게 이름 입력한 후에 주소 받아올 수 있도록해서 받아온 한글주소를 textview에 저장 )
+                // TextView 클릭될 시 할 코드작성 ( 지도 띄워서 사용자가 가게 이름 입력한 후에 주소 받아올 수 있도록해서 받아온 한글주소를 textview에 저장  )
+                
+                /* 이 부분에 저장해줘
+                info = ;
+                address_store = ;
+                */
+                
             }
         });
 
@@ -60,7 +67,9 @@ public class SalePostingActivity extends AppCompatActivity {
                 TodaySaleForm form = new TodaySaleForm();
 
                 form.setInfo(info.getText().toString());
-                form.setAddress(address.getText().toString());
+                form.setStore_address(address_store.getText().toString());
+                form.setAddress(address);
+                form.setAddress_around(address_round);
 
                 call = retrofitClient.retrofitService.postTodaySale(form);
 
@@ -75,6 +84,12 @@ public class SalePostingActivity extends AppCompatActivity {
                         else{
                             Log.d("tag2","실패");
                         }
+
+                        /* 크리스마스때처럼 스레드땜에 오류나는거면 맨밑에꺼 주석하고 이 주석 활성화해보셈
+                        // 입력 완료 후 다시 동네특가 페이지로 이동
+                        setResult(RESULT_OK);
+                        finish();
+                         */
                     }
 
                     @Override
@@ -84,11 +99,14 @@ public class SalePostingActivity extends AppCompatActivity {
                 });
 
                 // 입력 완료 후 다시 동네특가 페이지로 이동
+                setResult(RESULT_OK);
                 finish();
             }
         });
 
     }
+
+
 
 
 }

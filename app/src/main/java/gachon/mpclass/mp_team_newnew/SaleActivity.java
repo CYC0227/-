@@ -10,34 +10,30 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gachon.mpclass.mp_team_newnew.api.MyGeoCoder;
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
 
 public class SaleActivity extends AppCompatActivity {
     ImageButton btn_inform;
     ImageButton btn_address;
 
     private String str;
-    private String[] addresses;
-    private String address;
+    private String address ="";
+
+    static List<TodaySaleForm> saleFormList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
 
-        //어댑터
-        ListView listView = findViewById(R.id.lv_comment_view);
-        MyAdapter adapter = new MyAdapter();
-
-        // db에서 정보 가져와서 adapter에 추가해야됨
-
-        // 이건 test
-
-        listView.setAdapter(adapter);
 
         // 본인 주소 찾기 버튼 (find my location)
         btn_address = (ImageButton) findViewById(R.id.btn_address);
@@ -45,9 +41,9 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyGeoCoder myGeoCoder = new MyGeoCoder(SaleActivity.this);
-                str = myGeoCoder.getAddress(); // 데이터베이스의 address
-                addresses = str.split(" ");
-                address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around
+                str = myGeoCoder.getAddress(); // 데이터베이스의 address (실제)
+                String[] addresses = str.split(" ");
+                address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around (자른 값)
 
                 Toast.makeText(getApplicationContext(), "현재 나의 위치 : " + str, Toast.LENGTH_LONG).show();
                 // Log.d("rev", address);
@@ -70,36 +66,23 @@ public class SaleActivity extends AppCompatActivity {
         });
     }
 
-    class MyAdapter extends BaseAdapter {
-        private ArrayList<MyItem_Sale> items = new ArrayList<>();
+    // SalePostingActivity에서 정보입력 완료 후 다시 돌아왔을 때 실행 : listview 뿌려줌
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        public void addItem(MyItem_Sale item) {
-            items.add(item);
-        }
+        if(resultCode == RESULT_OK){
+            if(requestCode == 1){
+                //어댑터
+                ListView listView = findViewById(R.id.listview);
+                SaleAdapter adapter = new SaleAdapter(this, R.layout.sale_item, saleFormList);
 
-        @Override
-        public int getCount() {
-            return items.size();
-        }
+                // db에서 정보 가져와서 adapter에 추가해야됨
 
-        @Override
-        public MyItem_Sale getItem(int position) {
-            return items.get(position);
-        }
+                listView.setAdapter(adapter);
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, final View convertView, ViewGroup parent) {
-            MyItemView_Sale view = new MyItemView_Sale(getApplicationContext());
-            MyItem_Sale item = items.get(position);
-            view.setInfo(item.getInfo());
-            view.setAddress(item.getAddress());
-
-            return view;
+                Toast.makeText(getApplicationContext(), " 동네특가 등록 성공! ", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
