@@ -56,6 +56,18 @@ public class PostingActivity extends AppCompatActivity {
     private ImageButton btn_submit;
     private ImageView btn_photo;
 
+    private EditText edit_ingredients;
+    private EditText edit_ingredients2;
+    private EditText edit_ingredients3;
+    private EditText edit_ingredients4;
+    private EditText edit_ingredients5;
+
+    private EditText edit_ingredients_num;
+    private EditText edit_ingredients_num2;
+    private EditText edit_ingredients_num3;
+    private EditText edit_ingredients_num4;
+    private EditText edit_ingredients_num5;
+
     private Uri filePath;
 
     private final int GET_GALLERY_IMAGE = 200; // 사진 가져오기 위해 쓰인 코드
@@ -88,6 +100,18 @@ public class PostingActivity extends AppCompatActivity {
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
         main_title = (EditText) findViewById(R.id.title);
+        //
+        edit_ingredients = (EditText) findViewById(R.id.edit_ingredients);
+        edit_ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
+        edit_ingredients3 = (EditText) findViewById(R.id.edit_ingredients3);
+        edit_ingredients4 = (EditText) findViewById(R.id.edit_ingredients4);
+        edit_ingredients5 = (EditText) findViewById(R.id.edit_ingredients5);
+
+        edit_ingredients_num = (EditText) findViewById(R.id.edit_ingredients_num);
+        edit_ingredients_num2 = (EditText) findViewById(R.id.edit_ingredients_num2);
+        edit_ingredients_num3 = (EditText) findViewById(R.id.edit_ingredients_num3);
+        edit_ingredients_num4 = (EditText) findViewById(R.id.edit_ingredients_num4);
+        edit_ingredients_num5 = (EditText) findViewById(R.id.edit_ingredients_num5);
 
         // 대문 사진 선택하기 (갤러리 접근)
         btn_photo.setOnClickListener(new View.OnClickListener() {
@@ -99,19 +123,19 @@ public class PostingActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ListAdapter(PostingActivity.this);
-        listView.setAdapter(adapter);
+//        adapter = new ListAdapter(PostingActivity.this);
+//        listView.setAdapter(adapter);
 
         // 재료 추가하기
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
-
-                edt_title.setText(edt_title.getText().toString());
-                edt_sub.setText(edt_sub.getText().toString());
-            }
-        });
+//        btn_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
+//
+//                edt_title.setText(edt_title.getText().toString());
+//                edt_sub.setText(edt_sub.getText().toString());
+//            }
+//        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +190,19 @@ public class PostingActivity extends AppCompatActivity {
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
                 form.setImgURL(file.getName());
+                // 임의의 ingredients form에 넣어두기
+                // 오빠님이 아래 주석한거에 맞게 PostingForm에 ingredients 5개 만들어주시면 됩니다용
+//                form.setIngredients_name(edit_ingredients.getText().toString());
+//                form.setIngredients_name2(edit_ingredients2.getText().toString());
+//                form.setIngredients_name3(edit_ingredients3.getText().toString());
+//                form.setIngredients_name4(edit_ingredients4.getText().toString());
+//                form.setIngredients_name5(edit_ingredients5.getText().toString());
+//
+//                form.setIngredients_quantity(edit_ingredients_num.getText().toString());
+//                form.setIngredients_quantity2(edit_ingredients_num2.getText().toString());
+//                form.setIngredients_quantity3(edit_ingredients_num3.getText().toString());
+//                form.setIngredients_quantity4(edit_ingredients_num4.getText().toString());
+//                form.setIngredients_quantity5(edit_ingredients_num5.getText().toString());
 
                 call = retrofitClient.retrofitService.setPostBody(form, session_email);
 

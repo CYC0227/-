@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
@@ -20,7 +21,7 @@ public class SalePostingActivity extends AppCompatActivity {
     private ListView listView;
     private ListAdapter adapter;
     private EditText info;
-    private EditText address;
+    private TextView address;
 
     private ImageButton btn_save;
 
@@ -39,10 +40,16 @@ public class SalePostingActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview);
         btn_save = (ImageButton) findViewById(R.id.submit);
 
-        address = (EditText) findViewById(R.id.edit_information);
+        address = (TextView) findViewById(R.id.edit_address);
         info = (EditText) findViewById(R.id.edit_description);
 
-
+        // address 누르면, 가게 주소 가져오게 함
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TextView 클릭될 시 할 코드작성
+            }
+        });
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
