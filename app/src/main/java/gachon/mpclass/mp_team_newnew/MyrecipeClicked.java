@@ -29,7 +29,6 @@ public class MyrecipeClicked extends AppCompatActivity {
         TextView day=(TextView) findViewById(R.id.text_kind_day);
         TextView kind=(TextView) findViewById(R.id.text_kind_country);
         TextView description=(TextView) findViewById(R.id.text_description);
-        TextView information=(TextView) findViewById(R.id.text_information);
         TextView ing_num=(TextView) findViewById(R.id.edit_ingredients_num);
         TextView ing_name=(TextView) findViewById(R.id.edit_ingredients);
         TextView ing_num2=(TextView) findViewById(R.id.edit_ingredients_num2);
@@ -47,7 +46,6 @@ public class MyrecipeClicked extends AppCompatActivity {
         day.setText(intent.getStringExtra("anniversary"));
         kind.setText(intent.getStringExtra("country"));
         description.setText(intent.getStringExtra("description"));
-        information.setText(intent.getStringExtra("information"));
         ing_num.setText(intent.getStringExtra("ingredients_quantity"));
         ing_name.setText(intent.getStringExtra("ingredients_name"));
         ing_num2.setText(intent.getStringExtra("ingredients_quantity2"));
@@ -62,12 +60,17 @@ public class MyrecipeClicked extends AppCompatActivity {
         Spinner people_spinner = findViewById(R.id.text_information);
         //final String kind_country = spi_country.getSelectedItem().toString();
 
-        people_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        people_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int people = Integer.parseInt((String) parent.getItemAtPosition(position));
 
                 System.out.println(people);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
