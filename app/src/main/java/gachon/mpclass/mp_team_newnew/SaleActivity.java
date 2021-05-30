@@ -2,6 +2,7 @@ package gachon.mpclass.mp_team_newnew;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,8 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+
+import gachon.mpclass.mp_team_newnew.api.MyGeoCoder;
 
 public class SaleActivity extends AppCompatActivity {
     ImageButton btn_inform;
@@ -32,19 +35,20 @@ public class SaleActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         // 본인 주소 찾기 버튼 (find my location)
-        btn_address = (ImageButton)findViewById(R.id.btn_address);
+        btn_address = (ImageButton) findViewById(R.id.btn_address);
         btn_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // 임시로 activity연결시켜놓음. 바꿔야함. ( gps로 본인 위치 가져올 수 있도록 )
-                Intent myintent = new Intent(getApplicationContext(), SalePostingActivity.class);
-                startActivityForResult(myintent, 1);
+                MyGeoCoder myGeoCoder = new MyGeoCoder(SaleActivity.this);
+                String str = myGeoCoder.getAddress(); // 데이터베이스의 address
+                String[] addresses = str.split(" ");
+                String address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around
+                // Log.d("rev", address);
             }
         });
 
         // information 추가하기 버튼
-        btn_inform = (ImageButton)findViewById(R.id.btn_inform);
+        btn_inform = (ImageButton) findViewById(R.id.btn_inform);
         btn_inform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,19 +61,28 @@ public class SaleActivity extends AppCompatActivity {
 
     class MyAdapter extends BaseAdapter {
         private ArrayList<MyItem_Sale> items = new ArrayList<>();
-        public void addItem(MyItem_Sale item){
+
+        public void addItem(MyItem_Sale item) {
             items.add(item);
         }
-        @Override public int getCount() {
+
+        @Override
+        public int getCount() {
             return items.size();
         }
-        @Override public MyItem_Sale getItem(int position) {
+
+        @Override
+        public MyItem_Sale getItem(int position) {
             return items.get(position);
         }
-        @Override public long getItemId(int position) {
+
+        @Override
+        public long getItemId(int position) {
             return position;
         }
-        @Override public View getView(final int position, final View convertView, ViewGroup parent) {
+
+        @Override
+        public View getView(final int position, final View convertView, ViewGroup parent) {
             MyItemView_Sale view = new MyItemView_Sale(getApplicationContext());
             MyItem_Sale item = items.get(position);
             view.setInfo(item.getInfo());
