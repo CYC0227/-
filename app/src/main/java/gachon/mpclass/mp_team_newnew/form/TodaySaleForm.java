@@ -4,6 +4,7 @@ public class TodaySaleForm {
     private String info;
     private String address;
     private String address_around;
+    private String store_address;
 
     @Override
     public String toString() {
@@ -11,7 +12,16 @@ public class TodaySaleForm {
                 "info='" + info + '\'' +
                 ", address='" + address + '\'' +
                 ", address_around='" + address_around + '\'' +
+                ", store_address='" + store_address + '\'' +
                 '}';
+    }
+
+    public String getStore_address() {
+        return store_address;
+    }
+
+    public void setStore_address(String store_address) {
+        this.store_address = store_address;
     }
 
     public String getInfo() {

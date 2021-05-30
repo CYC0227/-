@@ -38,7 +38,6 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
 
 
 
-
         ListView listView = (ListView) findViewById(R.id.listview);
 
 
