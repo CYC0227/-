@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="117dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/posting_rec1" />
+                    app:srcCompat="@drawable/post_rec" />
                 <ImageView
                     android:id="@+id/img_prof"
                     android:layout_width="match_parent"

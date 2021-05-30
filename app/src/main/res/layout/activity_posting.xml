@@ -29,13 +29,16 @@
                     android:layout_height="117dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/posting_rec1" />
+
+
                 <ImageView
                     android:id="@+id/plus_photo1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/add_photo"
-                    android:layout_margin="16dp" />
-
+                    android:layout_height="260dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_margin="30dp"
+                    android:background="@drawable/add_photo" />
 
                 <EditText
                     android:id="@+id/title"
