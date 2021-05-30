@@ -285,13 +285,11 @@ public class PostingActivity extends AppCompatActivity {
 
 
 
-
+                // 포스팅 성공하면 토스트메시지 + 창 닫아주기
+                Toast.makeText(getApplicationContext(), "포스팅 성공!", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
-        
-        // 포스팅 성공하면 토스트메시지 + 창 닫아주기
-        Toast.makeText(getApplicationContext(), "포스팅 성공!", Toast.LENGTH_LONG).show();
-        finish();
     }
 
     @Override

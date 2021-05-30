@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +44,8 @@ public class SaleActivity extends AppCompatActivity {
                 String str = myGeoCoder.getAddress(); // 데이터베이스의 address
                 String[] addresses = str.split(" ");
                 String address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around
+
+                Toast.makeText(getApplicationContext(), "현재 나의 위치 : " + str, Toast.LENGTH_LONG).show();
                 // Log.d("rev", address);
             }
         });
