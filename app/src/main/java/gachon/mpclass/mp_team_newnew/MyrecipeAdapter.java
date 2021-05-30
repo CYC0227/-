@@ -60,7 +60,12 @@ public class MyrecipeAdapter extends BaseAdapter {
 
         ImageView heart = (ImageView) convertView.findViewById(R.id.heart);
 
-
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                heart.setImageResource(R.drawable.heart_red);
+            }
+        });
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
