@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
     ImageButton button_mypage;
     ImageButton button_posting;
     ImageButton button_sale;
+
+    ImageButton ranking1;
+    ImageButton ranking2;
+    ImageButton ranking3;
+    ImageButton ranking4;
+    ImageButton ranking5;
 
     List<Bitmap> imgList = new ArrayList<>();
     List<PostingForm> postingFormList = new ArrayList<>();
@@ -93,6 +100,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // 데이터베이스에서 포스팅 5개 가져오기
+
+        // 가로 스크롤에 가져온 포스팅 5개 정보 채워주기
+        ranking1 = (ImageButton)findViewById(R.id.rank1);
+        ranking2 = (ImageButton)findViewById(R.id.rank2);
+        ranking3 = (ImageButton)findViewById(R.id.rank3);
+        ranking4 = (ImageButton)findViewById(R.id.rank4);
+        ranking5 = (ImageButton)findViewById(R.id.rank5);
+
+//        ranking1.setImageBitmap();
+//        ranking2.setImageBitmap();
+//        ranking3.setImageBitmap();
+//        ranking4.setImageBitmap();
+//        ranking5.setImageBitmap();
+
+        // 각 사진 누르면 포스트로 넘어가게
+        ranking1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
+
+                // 데이터베이스에서 가져온 값을 intent로 넘겨준다.
+            }
+        });
 
 //
 //        //test

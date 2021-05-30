@@ -49,11 +49,11 @@ public class MyrecipeAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, parent, false);
         }
         PostingForm myrecipeItem = postingFormList.get(position);
-//        Bitmap bitmap = imgList.get(position);
+        Bitmap bitmap = imgList.get(position);
 
-//        // 이미지 파일 연동
-//        ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
-//        profile.setImageBitmap(bitmap);
+        // 이미지 파일 연동
+        ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
+        profile.setImageBitmap(bitmap);
 
         // 이름 등 정보 연동
         TextView info = (TextView) convertView.findViewById(R.id.info);

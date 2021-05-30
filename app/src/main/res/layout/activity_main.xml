@@ -84,7 +84,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/meat"/>
+                                android:background="@drawable/meat"/>
 
                             <ImageButton
                                 android:id="@+id/rank2"
@@ -94,7 +94,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/chicken" />
+                                android:background="@drawable/chicken" />
 
                             <ImageButton
                                 android:id="@+id/rank3"
@@ -104,7 +104,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/soup" />
+                                android:background="@drawable/soup" />
 
                             <ImageButton
                                 android:id="@+id/rank4"
@@ -114,7 +114,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/soup" />
+                                android:background="@drawable/soup" />
 
                             <ImageButton
                                 android:id="@+id/rank5"
@@ -124,7 +124,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/soup" />
+                                android:background="@drawable/soup" />
                         </LinearLayout>
                     </HorizontalScrollView>
                 </LinearLayout>
