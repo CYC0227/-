@@ -41,10 +41,10 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myrecipe);
 
-        button_home = findViewById(R.id.home);
-        button_kind = findViewById(R.id.kind);
-        button_posting = findViewById(R.id.posting);
-        button_mypage = findViewById(R.id.mypage);
+//        button_home = findViewById(R.id.home);
+//        button_kind = findViewById(R.id.kind);
+//        button_posting = findViewById(R.id.posting);
+//        button_mypage = findViewById(R.id.mypage);
 
 
 
@@ -116,7 +116,7 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
 
                 /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
-                intent.putExtra("imgURL", imgList.get(position));
+                //intent.putExtra("imgURL", imgList.get(position));
                 intent.putExtra("title", postingFormList.get(position).getTitle());
                 intent.putExtra("description", postingFormList.get(position).getDescription());
                 intent.putExtra("information", postingFormList.get(position).getInformation());
@@ -130,45 +130,45 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
         });
 
 
-        button_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // main -> new
-                Intent myintent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(myintent, 1);
-            }
-        });
-
-        button_kind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // main -> new
-                Intent myintent = new Intent(getApplicationContext(), ClassificationActivity.class);
-                startActivityForResult(myintent, 1);
-            }
-        });
-
-        button_posting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //main -> new
-                Intent myintent = new Intent(getApplicationContext(), PostingActivity.class);
-                startActivityForResult(myintent, 1);
-
-            }
-        });
-
-        button_mypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // main -> new
-                Intent myintent = new Intent(getApplicationContext(), MypageActivity.class);
-                startActivityForResult(myintent, 1);
-            }
-        });
+//        button_home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                // main -> new
+//                Intent myintent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivityForResult(myintent, 1);
+//            }
+//        });
+//
+//        button_kind.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                // main -> new
+//                Intent myintent = new Intent(getApplicationContext(), ClassificationActivity.class);
+//                startActivityForResult(myintent, 1);
+//            }
+//        });
+//
+//        button_posting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //main -> new
+//                Intent myintent = new Intent(getApplicationContext(), PostingActivity.class);
+//                startActivityForResult(myintent, 1);
+//
+//            }
+//        });
+//
+//        button_mypage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                // main -> new
+//                Intent myintent = new Intent(getApplicationContext(), MypageActivity.class);
+//                startActivityForResult(myintent, 1);
+//            }
+//        });
     }
 
     @Override
