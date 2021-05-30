@@ -12,6 +12,8 @@ public class PostingForm {
     private String country;
     private String videoURL;
 
+    public PostingForm(){}
+
     public PostingForm(String imgURL, String title, String description, String information, String ingredients_name, String ingredients_quantity, String anniversary, String country, String videoURL) {
         this.imgURL = imgURL;
         this.title = title;

@@ -1,6 +1,7 @@
 package gachon.mpclass.mp_team_newnew;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,28 +10,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 
 public class MyrecipeAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private ArrayList<PostingForm> data; //Item 목록을 담을 배열
+    private List<PostingForm> postingFormList; //Item 목록을 담을 배열
     private int layout;
+    private List<Bitmap> imgList = new ArrayList<>();
 
-    public MyrecipeAdapter(Context context, int layout, ArrayList<PostingForm> data) {
+    public MyrecipeAdapter(Context context, int layout, List<PostingForm> data, List<Bitmap> imgList) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.data = data;
+        this.postingFormList = data;
         this.layout = layout;
+        this.imgList = imgList;
     }
 
     @Override
     public int getCount() { //리스트 안 Item의 개수를 센다.
-        return data.size();
+        return postingFormList.size();
     }
 
     @Override
     public String getItem(int position) {
-        return data.get(position).getTitle();
+        return postingFormList.get(position).getTitle();
     }
 
     @Override
@@ -43,7 +47,7 @@ public class MyrecipeAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(layout, parent, false);
         }
-        PostingForm myrecipeItem = data.get(position);
+        PostingForm myrecipeItem = postingFormList.get(position);
 
         //이미지 파일 연동
         ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
