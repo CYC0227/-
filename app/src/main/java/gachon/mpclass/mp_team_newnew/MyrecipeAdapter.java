@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
+
 public class MyrecipeAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private ArrayList<MyrecipeItem> data; //Item 목록을 담을 배열
+    private ArrayList<PostingForm> data; //Item 목록을 담을 배열
     private int layout;
 
-    public MyrecipeAdapter(Context context, int layout, ArrayList<MyrecipeItem> data) {
+    public MyrecipeAdapter(Context context, int layout, ArrayList<PostingForm> data) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
         this.layout = layout;
@@ -41,11 +43,11 @@ public class MyrecipeAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(layout, parent, false);
         }
-        MyrecipeItem myrecipeItem = data.get(position);
+        PostingForm myrecipeItem = data.get(position);
 
         //이미지 파일 연동
         ImageView profile = (ImageView) convertView.findViewById(R.id.profile);
-        profile.setImageResource(myrecipeItem.getProfile());
+        profile.setImageResource(myrecipeItem.getImgURL());
 
         //이름 등 정보 연동
         TextView info = (TextView) convertView.findViewById(R.id.info);

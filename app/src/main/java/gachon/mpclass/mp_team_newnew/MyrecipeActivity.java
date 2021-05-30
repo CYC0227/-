@@ -26,7 +26,7 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
     ImageButton button_posting;
     ImageButton button_mypage;
 
-    private ArrayList<MyrecipeItem> data = null;
+    private ArrayList<PostingForm> data = null;
     private ArrayList<PostingForm> data2 = null;
 
     @Override
@@ -67,8 +67,8 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
 
         data = new ArrayList<>();
 
-        MyrecipeItem item1 = new MyrecipeItem(R.drawable.chicken, "title", "야채썰고 볶는다.", "3", "양파","1", "christmas", "India");
-        MyrecipeItem item2 = new MyrecipeItem(R.drawable.chicken, "title2","야채썰고 볶는다2.", "3", "양파2","1", "christmas", "India");
+        PostingForm item1 = new PostingForm("Image", "title", "야채썰고 볶는다.", "3", "양파","1", "christmas", "India","video");
+        PostingForm item2 = new PostingForm("Image2", "title2","야채썰고 볶는다2.", "3", "양파2","1", "christmas", "India","video");
 
         data.add(item1);
         data.add(item2);
@@ -100,7 +100,7 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
 
                 /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
-                intent.putExtra("profile", Integer.toString(data.get(position).getProfile()));
+                intent.putExtra("profile", data.get(position).getImgURL());
                 intent.putExtra("title", data.get(position).getTitle());
                 intent.putExtra("description", data.get(position).getDescription());
                 intent.putExtra("information", data.get(position).getInformation());

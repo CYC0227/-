@@ -14,7 +14,6 @@ public class MyrecipeItem {
         return profile;
     }
 
-
     public String getTitle() {
         return title;
     }
