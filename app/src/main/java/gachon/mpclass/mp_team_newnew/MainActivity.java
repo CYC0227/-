@@ -173,9 +173,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        // 데이터베이스에서 포스팅 5개 가져오기
-
         // 가로 스크롤에 가져온 포스팅 5개 정보 채워주기
         ranking1 = (ImageButton)findViewById(R.id.rank1);
         ranking2 = (ImageButton)findViewById(R.id.rank2);
@@ -183,18 +180,13 @@ public class MainActivity extends AppCompatActivity {
         ranking4 = (ImageButton)findViewById(R.id.rank4);
         ranking5 = (ImageButton)findViewById(R.id.rank5);
 
-//        ranking1.setImageBitmap();
-//        ranking2.setImageBitmap();
-//        ranking3.setImageBitmap();
-//        ranking4.setImageBitmap();
-//        ranking5.setImageBitmap();
-
         // 각 사진 누르면 포스트로 넘어가게
         ranking1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyrecipeClicked.class);
-
+                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
+                // main -> new
+                startActivityForResult(intent, 1);
                 // 데이터베이스에서 가져온 값을 intent로 넘겨준다.
             }
         });

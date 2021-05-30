@@ -23,6 +23,7 @@
         <activity android:name=".MyrecipeActivity"/>
         <activity android:name=".ScrapActivity"/>
         <activity android:name=".PostingActivity"/>
+        <activity android:name=".PostActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".JoinActivity"/>
         <activity android:name=".MainActivity"/>
