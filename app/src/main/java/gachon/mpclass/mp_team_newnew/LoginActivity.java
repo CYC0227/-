@@ -21,8 +21,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     RetrofitClient retrofitClient = new RetrofitClient();
-
     Call<Boolean> call;
+
+
+    public static Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
 //                        Boolean isSuccessful = response.body();
 //
 //                        if(isSuccessful){
+
+//                            //세션 생성
+//                            session = new Session(email);
+
 //                            // login -> main
 //                            Intent myintent = new Intent(getApplicationContext(), MainActivity.class);
 //                            startActivityForResult(myintent, 1);
