@@ -20,6 +20,8 @@ public class MyrecipeAdapter extends BaseAdapter {
     private int layout;
     private List<Bitmap> imgList = new ArrayList<>();
 
+    private boolean clicked = true;
+
     public MyrecipeAdapter(Context context, int layout, List<PostingForm> data, List<Bitmap> imgList) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.postingFormList = data;
@@ -63,7 +65,14 @@ public class MyrecipeAdapter extends BaseAdapter {
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                heart.setImageResource(R.drawable.heart_red);
+                if(clicked) {
+                    heart.setImageResource(R.drawable.heart_red);
+                    clicked=false;
+                }
+                else{
+                    heart.setImageResource(R.drawable.insta_heart);
+                    clicked=true;
+                }
             }
         });
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

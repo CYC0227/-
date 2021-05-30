@@ -59,10 +59,10 @@ public class MyrecipeClicked extends AppCompatActivity {
 
         int people_init = Integer.parseInt(intent.getStringExtra("information"));    // 글에 설정된 몇인분인지
         int ing_num_int = Integer.parseInt(intent.getStringExtra("ingredients_quantity"));  // 재료1의 양
-        int ing_num_int2 = Integer.parseInt(intent.getStringExtra("ingredients_quantity5"));  // 재료1의 양
-        int ing_num_int3 = Integer.parseInt(intent.getStringExtra("ingredients_quantity3"));  // 재료1의 양
-        int ing_num_int4 = Integer.parseInt(intent.getStringExtra("ingredients_quantity4"));  // 재료1의 양
-        int ing_num_int5 = Integer.parseInt(intent.getStringExtra("ingredients_quantity5"));  // 재료1의 양
+        int ing_num_int2 = Integer.parseInt(intent.getStringExtra("ingredients_quantity2"));  // 재료2의 양
+        int ing_num_int3 = Integer.parseInt(intent.getStringExtra("ingredients_quantity3"));  // 재료3의 양
+        int ing_num_int4 = Integer.parseInt(intent.getStringExtra("ingredients_quantity4"));  // 재료4의 양
+        int ing_num_int5 = Integer.parseInt(intent.getStringExtra("ingredients_quantity5"));  // 재료5의 양
 
         Spinner people_spinner = findViewById(R.id.text_information);
         //final String kind_country = spi_country.getSelectedItem().toString();
