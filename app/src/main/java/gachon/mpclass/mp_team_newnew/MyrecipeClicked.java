@@ -75,11 +75,11 @@ public class MyrecipeClicked extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int people_after = Integer.parseInt((String) parent.getItemAtPosition(position));
 
-                ing_num.setText(ing_num_int*people_after/people_init);
-                ing_num2.setText(ing_num_int2*people_after/people_init);
-                ing_num3.setText(ing_num_int3*people_after/people_init);
-                ing_num4.setText(ing_num_int4*people_after/people_init);
-                ing_num5.setText(ing_num_int5*people_after/people_init);
+                ing_num.setText(String.valueOf(ing_num_int*people_after/people_init));
+                ing_num2.setText(String.valueOf(ing_num_int2*people_after/people_init));
+                ing_num3.setText(String.valueOf(ing_num_int3*people_after/people_init));
+                ing_num4.setText(String.valueOf(ing_num_int4*people_after/people_init));
+                ing_num5.setText(String.valueOf(ing_num_int5*people_after/people_init));
                 System.out.println(people_after);
             }
 
