@@ -5,12 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MyrecipeClicked extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,18 @@ public class MyrecipeClicked extends AppCompatActivity {
         ing_name4.setText(intent.getStringExtra("ingredients_name4"));
         ing_num5.setText(intent.getStringExtra("ingredients_quantity5"));
         ing_name5.setText(intent.getStringExtra("ingredients_name5"));
+
+        Spinner people_spinner = findViewById(R.id.text_information);
+        //final String kind_country = spi_country.getSelectedItem().toString();
+
+        people_spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int people = Integer.parseInt((String) parent.getItemAtPosition(position));
+
+                System.out.println(people);
+            }
+        });
 
     }
 }
