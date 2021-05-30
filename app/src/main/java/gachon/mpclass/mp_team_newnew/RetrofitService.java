@@ -53,6 +53,9 @@ public interface RetrofitService {
     @GET("/todaysales")
     Call<List<TodaySaleForm>> getTodaySales();
 
+    @GET("/todaysales/around")
+    Call<List<TodaySaleForm>> getTodaySalesAround(@Query("region") String region);
+
 
 
     @Multipart

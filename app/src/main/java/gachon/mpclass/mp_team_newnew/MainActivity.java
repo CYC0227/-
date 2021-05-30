@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         weatherAPI = new WeatherAPI(this);
 
         gpsTracker.startLocationService();
-        weatherAPI.callCurrentWeather(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+        weatherAPI.callCurrentWeather(GpsTracker.latitude, GpsTracker.longitude);
         ImageView recommend = findViewById(R.id.recommend_picture);
         recommend.setImageResource(R.drawable.rain);
     }
