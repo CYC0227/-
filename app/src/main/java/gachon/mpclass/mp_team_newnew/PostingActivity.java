@@ -66,6 +66,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,15 +88,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Multipart;
 
 public class PostingActivity extends AppCompatActivity {
-    private ListView listView;
-    private ListAdapter adapter;
-    private EditText main_title;
     private EditText description;
     private EditText information;
 
     private EditText edt_title;
     private EditText edt_sub;
-    private ImageButton btn_add;
     private ImageButton btn_submit;
     private ImageView btn_photo;
 
@@ -134,15 +131,11 @@ public class PostingActivity extends AppCompatActivity {
         //final String kind_country = spi_country.getSelectedItem().toString();
 
         // 뷰 참조
-        edt_title = (EditText) findViewById(R.id.edit_ingredients);
-        edt_sub = (EditText) findViewById(R.id.edit_ingredients_num);
-        btn_add = (ImageButton) findViewById(R.id.plus);
-        listView = (ListView) findViewById(R.id.listview);
+        edt_title = (EditText) findViewById(R.id.title);
         btn_submit = (ImageButton) findViewById(R.id.submit);
         btn_photo = (ImageView) findViewById(R.id.plus_photo1) ;
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
-        main_title = (EditText) findViewById(R.id.title);
         //
         edit_ingredients = (EditText) findViewById(R.id.edit_ingredients);
         edit_ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
@@ -165,20 +158,6 @@ public class PostingActivity extends AppCompatActivity {
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
-
-//        adapter = new ListAdapter(PostingActivity.this);
-//        listView.setAdapter(adapter);
-
-        // 재료 추가하기
-//        btn_add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
-//
-//                edt_title.setText(edt_title.getText().toString());
-//                edt_sub.setText(edt_sub.getText().toString());
-//            }
-//        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,29 +247,7 @@ public class PostingActivity extends AppCompatActivity {
 //서버와 통신가능하지만, 여러 수정필요
                     }
                 });
-
-
-//
-//                //intent (bundle로 싸서) - posting -> post
-//                // change form to string
-//                String set_title = main_title.getText().toString();
-//                String set_description = description.getText().toString();
-//                String set_information = information.getText().toString();
-//                final String kind_day = spi_day.getSelectedItem().toString();
-//                final String kind_country = spi_country.getSelectedItem().toString();
-//                // make bundle
-//                Bundle bun = new Bundle();
-//                bun.putString("title",set_title);
-//                bun.putString("kind_day",kind_day);
-//                bun.putString("kind_country",kind_country);
-//                bun.putString("description",set_description);
-//                bun.putString("information",set_information);
-//
-//                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
-//                intent.putExtras(bun);
-//                startActivityForResult(intent,1);
-
-
+                
                 //test
                 Call<List<PostingForm>> call2;
                 call2 = retrofitClient.retrofitService.getPosts("demouser");
@@ -331,7 +288,10 @@ public class PostingActivity extends AppCompatActivity {
 
             }
         });
-
+        
+        // 포스팅 성공하면 토스트메시지 + 창 닫아주기
+        Toast.makeText(getApplicationContext(), "포스팅 성공!", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override

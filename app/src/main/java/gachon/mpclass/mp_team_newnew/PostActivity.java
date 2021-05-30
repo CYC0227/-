@@ -3,6 +3,9 @@ package gachon.mpclass.mp_team_newnew;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,8 +16,7 @@ public class PostActivity extends AppCompatActivity {
     TextView title;
     TextView kind_day;
     TextView kind_country;
-    TextView description;
-    TextView information;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,33 +25,18 @@ public class PostActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         kind_day = findViewById(R.id.text_kind_day);
         kind_country = findViewById(R.id.text_kind_country);
-        description = findViewById(R.id.text_description);
-        information = findViewById(R.id.text_information);
 
-//        //intent
-//        Intent intent = getIntent();
-//        if(intent != null){
-//            Bundle bun = new Bundle();
-//            bun = intent.getExtras();
-//
-//            String get_title = bun.getString("title");
-//            String get_kind_day = bun.getString("kind_day");
-//            String get_kind_country = bun.getString("kind_country");
-//            String get_description = bun.getString("description");
-//            String get_information = bun.getString("information");
-//            title.setText(get_title);
-//            kind_day.setText(get_kind_day);
-//            kind_country.setText(get_kind_country);
-//            description.setText(get_description);
-//            information.setText(get_information);
-//            title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24) ;
-//            title.setText(get_title) ;
-//            setContentView(title) ;
-
-//            Toast.makeText(getApplicationContext(),
-//                    "Posting Success ", Toast.LENGTH_LONG).show();
-
-//        }
+        TextView description=(TextView) findViewById(R.id.text_description);
+        TextView ing_num=(TextView) findViewById(R.id.edit_ingredients_num);
+        TextView ing_name=(TextView) findViewById(R.id.edit_ingredients);
+        TextView ing_num2=(TextView) findViewById(R.id.edit_ingredients_num2);
+        TextView ing_name2=(TextView) findViewById(R.id.edit_ingredients2);
+        TextView ing_num3=(TextView) findViewById(R.id.edit_ingredients_num3);
+        TextView ing_name3=(TextView) findViewById(R.id.edit_ingredients3);
+        TextView ing_num4=(TextView) findViewById(R.id.edit_ingredients_num4);
+        TextView ing_name4=(TextView) findViewById(R.id.edit_ingredients4);
+        TextView ing_num5=(TextView) findViewById(R.id.edit_ingredients_num5);
+        TextView ing_name5=(TextView) findViewById(R.id.edit_ingredients5);
 
     }
 }
