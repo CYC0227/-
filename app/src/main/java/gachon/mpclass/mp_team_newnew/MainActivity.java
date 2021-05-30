@@ -20,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class MainActivity extends AppCompatActivity {
 
     ImageButton button_kind;
@@ -34,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
     ImageButton ranking5;
 
     List<Bitmap> imgList = new ArrayList<>();
+    List<Bitmap> imgList2 = new ArrayList<>();
+
     List<PostingForm> postingFormList = new ArrayList<>();
+    List<PostingForm> postingFormList2 = new ArrayList<>();
+
+
+    RetrofitClient retrofitClient = new RetrofitClient();
+    Call<List<PostingForm>> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,71 @@ public class MainActivity extends AppCompatActivity {
         button_posting = findViewById(R.id.posting);
         button_mypage = findViewById(R.id.mypage);
         button_sale = findViewById(R.id.sale);
+
+
+
+        //db에서 가져오는 부분
+        String anniv  = "Christmas";
+        call = retrofitClient.retrofitService.getPostsByAnniversary(anniv);
+
+
+        call.enqueue(new Callback<List<PostingForm>>() {
+            @Override
+            public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
+                for(PostingForm postingForm: response.body()) {
+                    postingFormList2.add(postingForm);
+
+                    System.out.println("postingForm = " + postingForm);
+                    System.out.println("@@@@@@@@@@@@@@##################@@@@@@@@@@@@@########");
+                }
+                ChristmasActivity.postingFormList2 = postingFormList2;
+
+                for (PostingForm postingForm: postingFormList2) {
+                    String img = postingForm.getImgURL();
+
+                    Call<ResponseBody> callImageDown;
+                    callImageDown = retrofitClient.retrofitService.downloadFile(img);
+
+                    callImageDown.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            InputStream is = response.body().byteStream();
+                            Bitmap bitmap = BitmapFactory.decodeStream(is);
+
+                            imgList2.add(bitmap);
+                            System.out.println("bitmap = " + bitmap);
+                            System.out.println("biiit");
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("TAG", "Image download error: " + t.getLocalizedMessage());
+
+                        }
+                    });
+
+                }
+
+                ChristmasActivity.imgList2 = imgList2;
+            }
+
+            @Override
+            public void onFailure(Call<List<PostingForm>> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Log.d("tag4","실패" + t.getMessage());
+                System.out.println("FAIL");
+
+            }
+
+
+
+        });
+
+
+
+
 
 
         RetrofitClient retrofitClient = new RetrofitClient();
