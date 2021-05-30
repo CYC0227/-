@@ -14,8 +14,8 @@ import gachon.mpclass.mp_team_newnew.MainActivity;
 public class GpsTracker {
 
     private MainActivity main;
-    private double latitude;
-    private double longitude;
+    public static double latitude;
+    public static double longitude;
 
     public GpsTracker(MainActivity context) {
         main = context;
@@ -72,13 +72,5 @@ public class GpsTracker {
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
         }
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
     }
 }
