@@ -1,4 +1,5 @@
 package gachon.mpclass.mp_team_newnew;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,11 +10,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import gachon.mpclass.mp_team_newnew.api.GpsTracker;
+import gachon.mpclass.mp_team_newnew.api.WeatherAPI;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -44,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     RetrofitClient retrofitClient = new RetrofitClient();
     Call<List<PostingForm>> call;
 
+    GpsTracker gpsTracker;
+    WeatherAPI weatherAPI;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +63,15 @@ public class MainActivity extends AppCompatActivity {
         button_sale = findViewById(R.id.sale);
 
 
-
         //db에서 가져오는 부분
-        String anniv  = "Christmas";
+        String anniv = "Christmas";
         call = retrofitClient.retrofitService.getPostsByAnniversary(anniv);
 
 
         call.enqueue(new Callback<List<PostingForm>>() {
             @Override
             public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
-                for(PostingForm postingForm: response.body()) {
+                for (PostingForm postingForm : response.body()) {
                     postingFormList2.add(postingForm);
 
                     System.out.println("postingForm = " + postingForm);
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ChristmasActivity.postingFormList2 = postingFormList2;
 
-                for (PostingForm postingForm: postingFormList2) {
+                for (PostingForm postingForm : postingFormList2) {
                     String img = postingForm.getImgURL();
 
                     Call<ResponseBody> callImageDown;
@@ -106,18 +113,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<PostingForm>> call, Throwable t) {
                 System.out.println(t.getMessage());
-                Log.d("tag4","실패" + t.getMessage());
+                Log.d("tag4", "실패" + t.getMessage());
                 System.out.println("FAIL");
 
             }
 
 
-
         });
-
-
-
-
 
 
         RetrofitClient retrofitClient = new RetrofitClient();
@@ -130,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
         call2.enqueue(new Callback<List<PostingForm>>() {
             @Override
             public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
-                for(PostingForm postingForm: response.body()) {
+                for (PostingForm postingForm : response.body()) {
                     postingFormList.add(postingForm);
 
-                    System.out.println(" aaaassssssssssssssssssssssssssssssssssssssssssss123123 " );
+                    System.out.println(" aaaassssssssssssssssssssssssssssssssssssssssssss123123 ");
                     System.out.println(postingForm.toString());
                 }
 
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //image download
 
-                for (PostingForm postingForm: postingFormList) {
+                for (PostingForm postingForm : postingFormList) {
                     String img = postingForm.getImgURL();
 
                     Call<ResponseBody> callImageDown;
@@ -156,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                             imgList.add(bitmap);
                             System.out.println("bitmap = " + bitmap);
                         }
+
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
                             Log.d("TAG", "Image download error: " + t.getLocalizedMessage());
@@ -169,19 +172,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<PostingForm>> call, Throwable t) {
                 System.out.println(t.getMessage());
-                Log.d("tag4","실패" + t.getMessage());
+                Log.d("tag4", "실패" + t.getMessage());
             }
         });
 
         // 가로 스크롤에 가져온 포스팅 5개 정보 채워주기
-        ranking1 = (ImageButton)findViewById(R.id.rank1);
-        ranking2 = (ImageButton)findViewById(R.id.rank2);
-        ranking3 = (ImageButton)findViewById(R.id.rank3);
-        ranking4 = (ImageButton)findViewById(R.id.rank4);
-        ranking5 = (ImageButton)findViewById(R.id.rank5);
+        ranking1 = (ImageButton) findViewById(R.id.rank1);
+        ranking2 = (ImageButton) findViewById(R.id.rank2);
+        ranking3 = (ImageButton) findViewById(R.id.rank3);
+        ranking4 = (ImageButton) findViewById(R.id.rank4);
+        ranking5 = (ImageButton) findViewById(R.id.rank5);
 
         // 각 사진 누르면 포스트로 넘어가게
-        ranking1.setOnClickListener(new View.OnClickListener(){
+        ranking1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PostActivity.class);
@@ -211,8 +214,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        });
-
-
 
 
         //test
@@ -256,5 +257,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(myintent, 1);
             }
         });
+
+        // 날씨 파트
+        gpsTracker = new GpsTracker(this);
+        weatherAPI = new WeatherAPI(this);
+
+        gpsTracker.startLocationService();
+        weatherAPI.callCurrentWeather(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+        ImageView recommend = findViewById(R.id.recommend_picture);
+        // recommend.setImageResource(R.drawable.rain); <- 이 부분만 수정하여 결과 바꾸면 될 듯
     }
 }
