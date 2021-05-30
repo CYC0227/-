@@ -33,7 +33,8 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
-    List<Bitmap> imgList = new ArrayList<>();
+    static List<Bitmap> imgList = new ArrayList<>();
+    static List<PostingForm> postingFormList = new ArrayList<>();
 
 
     @Override
@@ -48,61 +49,10 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-        RetrofitClient retrofitClient = new RetrofitClient();
-        Call<List<PostingForm>> call2;
-        call2 = retrofitClient.retrofitService.getPosts("kevin");
-
-        //DB에서 가져온 유저의 모든 포스팅
-        List<PostingForm> postingFormList = new ArrayList<>();
-
-        call2.enqueue(new Callback<List<PostingForm>>() {
-            @Override
-            public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
-                for(PostingForm postingForm: response.body()) {
-                    postingFormList.add(postingForm);
-
-                    System.out.println(postingForm.toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PostingForm>> call, Throwable t) {
-                System.out.println(t.getMessage());
-                Log.d("tag4","실패" + t.getMessage());
-            }
-        });
-
-//image download
-
-        for (PostingForm postingForm: postingFormList) {
-            String img = postingForm.getImgURL();
-
-            Call<ResponseBody> callImageDown;
-            callImageDown = retrofitClient.retrofitService.downloadFile(img);
-
-            callImageDown.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    InputStream is = response.body().byteStream();
-                    Bitmap bitmap = BitmapFactory.decodeStream(is);
-
-                    imgList.add(bitmap);
-                    System.out.println("bitmap = " + bitmap);
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.d("TAG", "Image download error: " + t.getLocalizedMessage());
-
-                }
-            });
-
-        }
-
-
 
 
         ListView listView = (ListView) findViewById(R.id.listview);
+
 
 
         MyrecipeAdapter adapter = new MyrecipeAdapter(this, R.layout.myrecipe_item, postingFormList, imgList);

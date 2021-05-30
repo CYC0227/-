@@ -327,27 +327,6 @@ public class PostingActivity extends AppCompatActivity {
                 //test
 
 
-                //test
-                Call<ResponseBody> callImageDown;
-                callImageDown = retrofitClient.retrofitService.downloadFile(file.getName());
-
-                callImageDown.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        InputStream is = response.body().byteStream();
-                        Bitmap bitmap = BitmapFactory.decodeStream(is);
-
-                        System.out.println("bitmap = " + bitmap);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.d("TAG", "Image download error: " + t.getLocalizedMessage());
-
-                    }
-                });
-
-                //test
 
 
             }
