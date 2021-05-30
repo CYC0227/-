@@ -43,6 +43,49 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Multipart;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import gachon.mpclass.mp_team_newnew.form.FileUploadResponse;
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Multipart;
+
 public class PostingActivity extends AppCompatActivity {
     private ListView listView;
     private ListAdapter adapter;
@@ -55,6 +98,18 @@ public class PostingActivity extends AppCompatActivity {
     private ImageButton btn_add;
     private ImageButton btn_submit;
     private ImageView btn_photo;
+
+    private EditText edit_ingredients;
+    private EditText edit_ingredients2;
+    private EditText edit_ingredients3;
+    private EditText edit_ingredients4;
+    private EditText edit_ingredients5;
+
+    private EditText edit_ingredients_num;
+    private EditText edit_ingredients_num2;
+    private EditText edit_ingredients_num3;
+    private EditText edit_ingredients_num4;
+    private EditText edit_ingredients_num5;
 
     private Uri filePath;
 
@@ -88,6 +143,18 @@ public class PostingActivity extends AppCompatActivity {
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
         main_title = (EditText) findViewById(R.id.title);
+        //
+        edit_ingredients = (EditText) findViewById(R.id.edit_ingredients);
+        edit_ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
+        edit_ingredients3 = (EditText) findViewById(R.id.edit_ingredients3);
+        edit_ingredients4 = (EditText) findViewById(R.id.edit_ingredients4);
+        edit_ingredients5 = (EditText) findViewById(R.id.edit_ingredients5);
+
+        edit_ingredients_num = (EditText) findViewById(R.id.edit_ingredients_num);
+        edit_ingredients_num2 = (EditText) findViewById(R.id.edit_ingredients_num2);
+        edit_ingredients_num3 = (EditText) findViewById(R.id.edit_ingredients_num3);
+        edit_ingredients_num4 = (EditText) findViewById(R.id.edit_ingredients_num4);
+        edit_ingredients_num5 = (EditText) findViewById(R.id.edit_ingredients_num5);
 
         // 대문 사진 선택하기 (갤러리 접근)
         btn_photo.setOnClickListener(new View.OnClickListener() {
@@ -99,19 +166,19 @@ public class PostingActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ListAdapter(PostingActivity.this);
-        listView.setAdapter(adapter);
+//        adapter = new ListAdapter(PostingActivity.this);
+//        listView.setAdapter(adapter);
 
         // 재료 추가하기
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
-
-                edt_title.setText(edt_title.getText().toString());
-                edt_sub.setText(edt_sub.getText().toString());
-            }
-        });
+//        btn_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
+//
+//                edt_title.setText(edt_title.getText().toString());
+//                edt_sub.setText(edt_sub.getText().toString());
+//            }
+//        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +233,19 @@ public class PostingActivity extends AppCompatActivity {
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
                 form.setImgURL(file.getName());
+                // 임의의 ingredients form에 넣어두기
+                // 오빠님이 아래 주석한거에 맞게 PostingForm에 ingredients 5개 만들어주시면 됩니다용
+//                form.setIngredients_name(edit_ingredients.getText().toString());
+//                form.setIngredients_name2(edit_ingredients2.getText().toString());
+//                form.setIngredients_name3(edit_ingredients3.getText().toString());
+//                form.setIngredients_name4(edit_ingredients4.getText().toString());
+//                form.setIngredients_name5(edit_ingredients5.getText().toString());
+//
+//                form.setIngredients_quantity(edit_ingredients_num.getText().toString());
+//                form.setIngredients_quantity2(edit_ingredients_num2.getText().toString());
+//                form.setIngredients_quantity3(edit_ingredients_num3.getText().toString());
+//                form.setIngredients_quantity4(edit_ingredients_num4.getText().toString());
+//                form.setIngredients_quantity5(edit_ingredients_num5.getText().toString());
 
                 call = retrofitClient.retrofitService.setPostBody(form, session_email);
 
