@@ -57,15 +57,30 @@ public class MyrecipeClicked extends AppCompatActivity {
         ing_num5.setText(intent.getStringExtra("ingredients_quantity5"));
         ing_name5.setText(intent.getStringExtra("ingredients_name5"));
 
+        int people_init = Integer.parseInt(intent.getStringExtra("information"));    // 글에 설정된 몇인분인지
+        int ing_num_int = Integer.parseInt(intent.getStringExtra("ingredients_quantity"));  // 재료1의 양
+        int ing_num_int2 = Integer.parseInt(intent.getStringExtra("ingredients_quantity5"));  // 재료1의 양
+        int ing_num_int3 = Integer.parseInt(intent.getStringExtra("ingredients_quantity3"));  // 재료1의 양
+        int ing_num_int4 = Integer.parseInt(intent.getStringExtra("ingredients_quantity4"));  // 재료1의 양
+        int ing_num_int5 = Integer.parseInt(intent.getStringExtra("ingredients_quantity5"));  // 재료1의 양
+
         Spinner people_spinner = findViewById(R.id.text_information);
         //final String kind_country = spi_country.getSelectedItem().toString();
 
+        people_spinner.setSelection(people_init-1);
+
+        // spinner에서 재료량 계산을 위한 숫자 선택시 재료량 변환
         people_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int people = Integer.parseInt((String) parent.getItemAtPosition(position));
+                int people_after = Integer.parseInt((String) parent.getItemAtPosition(position));
 
-                System.out.println(people);
+                ing_num.setText(ing_num_int*people_after/people_init);
+                ing_num2.setText(ing_num_int2*people_after/people_init);
+                ing_num3.setText(ing_num_int3*people_after/people_init);
+                ing_num4.setText(ing_num_int4*people_after/people_init);
+                ing_num5.setText(ing_num_int5*people_after/people_init);
+                System.out.println(people_after);
             }
 
             @Override
