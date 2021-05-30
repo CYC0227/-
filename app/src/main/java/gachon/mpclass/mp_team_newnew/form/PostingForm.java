@@ -120,6 +120,38 @@ public class PostingForm {
         this.videoURL = videoURL;
     }
 
+    public String getIngredients_name2() {
+        return ingredients_name2;
+    }
+
+    public String getIngredients_quantity2() {
+        return ingredients_quantity2;
+    }
+
+    public String getIngredients_name3() {
+        return ingredients_name3;
+    }
+
+    public String getIngredients_quantity3() {
+        return ingredients_quantity3;
+    }
+
+    public String getIngredients_name4() {
+        return ingredients_name4;
+    }
+
+    public String getIngredients_quantity4() {
+        return ingredients_quantity4;
+    }
+
+    public String getIngredients_name5() {
+        return ingredients_name5;
+    }
+
+    public String getIngredients_quantity5() {
+        return ingredients_quantity5;
+    }
+
     @Override
     public String toString() {
         return "PostingForm{" +

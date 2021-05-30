@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
@@ -20,7 +23,7 @@ public class SalePostingActivity extends AppCompatActivity {
     private ListView listView;
     private ListAdapter adapter;
     private EditText info;
-    private EditText address;
+    private TextView address;
 
     private ImageButton btn_save;
 
@@ -39,45 +42,49 @@ public class SalePostingActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview);
         btn_save = (ImageButton) findViewById(R.id.submit);
 
-        address = (EditText) findViewById(R.id.edit_information);
+        address = (TextView) findViewById(R.id.edit_address);        // address 누르면, 가게 주소 가져오게 함
         info = (EditText) findViewById(R.id.edit_description);
 
+        address.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                // TextView 클릭될 시 할 코드작성 ( 지도 띄워서 사용자가 가게 이름 입력한 후에 주소 받아올 수 있도록해서 받아온 한글주소를 textview에 저장 )
+            }
+        });
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-//                TodaySaleForm form = new TodaySaleForm();
-//
-//                form.setInfo(info.getText().toString());
-//                form.setAddress(address.getText().toString());
-//
-//                call = retrofitClient.retrofitService.postTodaySale(form);
-//
-//                call.enqueue(new Callback<TodaySaleForm>() {
-//                    @Override
-//                    public void onResponse(Call<TodaySaleForm> call, Response<TodaySaleForm> response) {
-//                        if(response.isSuccessful()){
-//                            TodaySaleForm result = response.body();
-//
-//                            Log.d("tag1","성공" + result.toString());
-//                        }
-//                        else{
-//                            Log.d("tag2","실패");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<TodaySaleForm> call, Throwable t) {
-//                        Log.d("tag3","실패" + t.getMessage());
-//                    }
-//                });
+                TodaySaleForm form = new TodaySaleForm();
 
-//                // 입력 완료 후 다시 동네특가 페이지로 이동
+                form.setInfo(info.getText().toString());
+                form.setAddress(address.getText().toString());
+
+                call = retrofitClient.retrofitService.postTodaySale(form);
+
+                call.enqueue(new Callback<TodaySaleForm>() {
+                    @Override
+                    public void onResponse(Call<TodaySaleForm> call, Response<TodaySaleForm> response) {
+                        if(response.isSuccessful()){
+                            TodaySaleForm result = response.body();
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                        else{
+                            Log.d("tag2","실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TodaySaleForm> call, Throwable t) {
+                        Log.d("tag3","실패" + t.getMessage());
+                    }
+                });
+
+                // 입력 완료 후 다시 동네특가 페이지로 이동
                 finish();
-//                Intent myintent = new Intent(getApplicationContext(), SaleActivity.class);
-//                startActivityForResult(myintent, 1);
             }
         });
 

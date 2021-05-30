@@ -20,7 +20,7 @@ public class MyrecipeClicked extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        ImageView imgURL = (ImageView) findViewById(R.id.img_prof);
+        ImageView profile = (ImageView) findViewById(R.id.img_prof);
         TextView view_title=(TextView) findViewById(R.id.title);
         TextView day=(TextView) findViewById(R.id.text_kind_day);
         TextView kind=(TextView) findViewById(R.id.text_kind_country);
@@ -28,9 +28,17 @@ public class MyrecipeClicked extends AppCompatActivity {
         TextView information=(TextView) findViewById(R.id.text_information);
         TextView ing_num=(TextView) findViewById(R.id.edit_ingredients_num);
         TextView ing_name=(TextView) findViewById(R.id.edit_ingredients);
+        TextView ing_num2=(TextView) findViewById(R.id.edit_ingredients_num2);
+        TextView ing_name2=(TextView) findViewById(R.id.edit_ingredients2);
+        TextView ing_num3=(TextView) findViewById(R.id.edit_ingredients_num3);
+        TextView ing_name3=(TextView) findViewById(R.id.edit_ingredients3);
+        TextView ing_num4=(TextView) findViewById(R.id.edit_ingredients_num4);
+        TextView ing_name4=(TextView) findViewById(R.id.edit_ingredients4);
+        TextView ing_num5=(TextView) findViewById(R.id.edit_ingredients_num5);
+        TextView ing_name5=(TextView) findViewById(R.id.edit_ingredients5);
 
 
-        imgURL.setImageBitmap(intent.getParcelableExtra("imgURL"));
+        profile.setImageBitmap(intent.getParcelableExtra("imgURL"));
         view_title.setText(intent.getStringExtra("title"));
         day.setText(intent.getStringExtra("anniversary"));
         kind.setText(intent.getStringExtra("country"));
@@ -38,6 +46,14 @@ public class MyrecipeClicked extends AppCompatActivity {
         information.setText(intent.getStringExtra("information"));
         ing_num.setText(intent.getStringExtra("ingredients_quantity"));
         ing_name.setText(intent.getStringExtra("ingredients_name"));
+        ing_num2.setText(intent.getStringExtra("ingredients_quantity2"));
+        ing_name2.setText(intent.getStringExtra("ingredients_name2"));
+        ing_num3.setText(intent.getStringExtra("ingredients_quantity3"));
+        ing_name3.setText(intent.getStringExtra("ingredients_name3"));
+        ing_num4.setText(intent.getStringExtra("ingredients_quantity4"));
+        ing_name4.setText(intent.getStringExtra("ingredients_name4"));
+        ing_num5.setText(intent.getStringExtra("ingredients_quantity5"));
+        ing_name5.setText(intent.getStringExtra("ingredients_name5"));
 
     }
 }

@@ -74,6 +74,14 @@ public class MyrecipeActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra("information", postingFormList.get(position).getInformation());
                 intent.putExtra("ingredients_name", postingFormList.get(position).getIngredients_name());
                 intent.putExtra("ingredients_quantity", postingFormList.get(position).getIngredients_quantity());
+                intent.putExtra("ingredients_name2", postingFormList.get(position).getIngredients_name2());
+                intent.putExtra("ingredients_quantity2", postingFormList.get(position).getIngredients_quantity2());
+                intent.putExtra("ingredients_name3", postingFormList.get(position).getIngredients_name3());
+                intent.putExtra("ingredients_quantity3", postingFormList.get(position).getIngredients_quantity3());
+                intent.putExtra("ingredients_name4", postingFormList.get(position).getIngredients_name4());
+                intent.putExtra("ingredients_quantity4", postingFormList.get(position).getIngredients_quantity4());
+                intent.putExtra("ingredients_name5", postingFormList.get(position).getIngredients_name5());
+                intent.putExtra("ingredients_quantity5", postingFormList.get(position).getIngredients_quantity5());
                 intent.putExtra("anniversary", postingFormList.get(position).getAnniversary());
                 intent.putExtra("country", postingFormList.get(position).getCountry());
                 intent.putExtra("videoURL", postingFormList.get(position).getVideoURL());

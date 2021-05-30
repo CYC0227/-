@@ -31,13 +31,13 @@ public class SaleActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
 
-        // 주소 찾기(추가하기)버튼
+        // 본인 주소 찾기 버튼 (find my location)
         btn_address = (ImageButton)findViewById(R.id.btn_address);
         btn_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // 임시로 activity연결시켜놓음. 바꿔야함.
+                // 임시로 activity연결시켜놓음. 바꿔야함. ( gps로 본인 위치 가져올 수 있도록 )
                 Intent myintent = new Intent(getApplicationContext(), SalePostingActivity.class);
                 startActivityForResult(myintent, 1);
             }
