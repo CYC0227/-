@@ -20,6 +20,10 @@ public class SaleActivity extends AppCompatActivity {
     ImageButton btn_inform;
     ImageButton btn_address;
 
+    private String str;
+    private String[] addresses;
+    private String address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +45,9 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyGeoCoder myGeoCoder = new MyGeoCoder(SaleActivity.this);
-                String str = myGeoCoder.getAddress(); // 데이터베이스의 address
-                String[] addresses = str.split(" ");
-                String address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around
+                str = myGeoCoder.getAddress(); // 데이터베이스의 address
+                addresses = str.split(" ");
+                address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around
 
                 Toast.makeText(getApplicationContext(), "현재 나의 위치 : " + str, Toast.LENGTH_LONG).show();
                 // Log.d("rev", address);
@@ -57,6 +61,10 @@ public class SaleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // information 입력하는 activity로 이동 ( SalePostingActivity )
                 Intent myintent = new Intent(getApplicationContext(), SalePostingActivity.class);
+
+                myintent.putExtra("address", str);
+                myintent.putExtra("address_around", address);
+
                 startActivityForResult(myintent, 1);
             }
         });
