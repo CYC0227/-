@@ -118,6 +118,11 @@ public class PostingActivity extends AppCompatActivity {
     Call<PostingForm> call;
     Call<FileUploadResponse> callPic;
 
+    ////글포스팅 할 때마다 intent로 마이페이지에 포인트 점수 주기
+    //Intent myIntent = new Intent(this, MypageActivity.class);
+    //int count=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -282,6 +287,11 @@ public class PostingActivity extends AppCompatActivity {
 
 
                 //test
+
+                //값 전달하기///////////////
+                //count += count;
+                //myIntent.putExtra("coumt",count);
+                //StartActivity(myIntent);
 
 
 
