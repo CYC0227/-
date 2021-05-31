@@ -45,6 +45,11 @@ public class SaleActivity extends AppCompatActivity {
                 String[] addresses = str.split(" ");
                 address = addresses[3] + " " + addresses[4]; // 데이터베이스의 address_around (자른 값)
 
+                SalePostingActivity.address_found = str;
+                SalePostingActivity.address_around_found = address;
+
+                System.out.println("@@@address_around_found = " + address);
+
                 Toast.makeText(getApplicationContext(), "현재 나의 위치 : " + str, Toast.LENGTH_LONG).show();
                 // Log.d("rev", address);
             }

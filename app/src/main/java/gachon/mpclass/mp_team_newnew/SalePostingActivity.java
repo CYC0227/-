@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
 import retrofit2.Call;
@@ -24,12 +26,19 @@ public class SalePostingActivity extends AppCompatActivity {
 
     public static String session_email = "kevin";//로그인 되는 순간 생성되야함. LoginActivity로 이동 필요
 
+    //미사용중
     private String address;
-    private String address_round;
+    private String address_around;
+
+    //사용중
+    static String address_found;
+    static String address_around_found;
+
+    static List<TodaySaleForm> todaySaleForms = new ArrayList<>();
 
     RetrofitClient retrofitClient = new RetrofitClient();
 
-    Call<TodaySaleForm> call;
+    Call<TodaySaleForm> callTodaySale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +48,7 @@ public class SalePostingActivity extends AppCompatActivity {
         Intent intent = getIntent();    // address, address_around 받아옴
 
         address = intent.getStringExtra("address");
-        address_round = intent.getStringExtra("address_around");
+        address_around = intent.getStringExtra("address_around");
         
         btn_save = (ImageButton) findViewById(R.id.submit);
 
@@ -68,12 +77,14 @@ public class SalePostingActivity extends AppCompatActivity {
 
                 form.setInfo(info.getText().toString());
                 form.setStore_address(address_store.getText().toString());
-                form.setAddress(address);
-                form.setAddress_around(address_round);
+                form.setAddress(address_found);
 
-                call = retrofitClient.retrofitService.postTodaySale(form);
+                form.setAddress_around(address_around_found);
+                System.out.println("@@@address_around_found 2 = " + address_around_found);
 
-                call.enqueue(new Callback<TodaySaleForm>() {
+                callTodaySale = retrofitClient.retrofitService.postTodaySale(form);
+
+                callTodaySale.enqueue(new Callback<TodaySaleForm>() {
                     @Override
                     public void onResponse(Call<TodaySaleForm> call, Response<TodaySaleForm> response) {
                         if(response.isSuccessful()){
