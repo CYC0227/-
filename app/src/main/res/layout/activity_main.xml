@@ -13,128 +13,130 @@
         android:layout_weight="8"
         android:orientation="vertical"
         android:layout_gravity="center">
-        <ScrollView
+        <!--        <ScrollView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fillViewport="true"-->
+        <!--            android:layout_gravity="center">-->
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
+            android:orientation="vertical"
             android:layout_gravity="center">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/backback"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:layout_gravity="center">
+                android:layout_weight="2">
 
-                <LinearLayout
+
+                <ImageView
+                    android:id="@+id/tomorrow_cook_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_weight="2">
+                    app:srcCompat="@drawable/tomorrow_cook"
+                    android:layout_marginTop="70dp"/>
 
-
-                    <ImageView
-                        android:id="@+id/tomorrow_cook_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/tomorrow_cook"
-                        android:layout_marginTop="70dp"/>
-
-                    <ImageView
-                        android:id="@+id/recommend_picture"
-                        android:layout_width="match_parent"
-                        android:layout_height="273dp"
-                        app:srcCompat="@drawable/noodle" />
-
-                    <ImageView
-                        android:id="@+id/recommend_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        app:srcCompat="@drawable/recommend" />
-                </LinearLayout>
-
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/recommend_picture"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:scaleType="fitXY"
-                    android:layout_weight="1"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="273dp"
+                    app:srcCompat="@drawable/noodle" />
 
-                    <HorizontalScrollView
-                        android:layout_width="389dp"
-                        android:layout_height="match_parent"
-                        android:fillViewport="false">
+                <ImageView
+                    android:id="@+id/recommend_text"
+                    android:layout_width="187dp"
+                    android:layout_height="62dp"
+                    android:layout_margin="15dp"
+                    app:srcCompat="@drawable/recommend" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:scaleType="fitXY"
-                            android:layout_marginLeft="5dp">
-
-                            <ImageButton
-                                android:id="@+id/rank1"
-                                android:layout_width="158dp"
-                                android:layout_height="141dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/meat"/>
-
-                            <ImageButton
-                                android:id="@+id/rank2"
-                                android:layout_width="158dp"
-                                android:layout_height="141dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/chicken" />
-
-                            <ImageButton
-                                android:id="@+id/rank3"
-                                android:layout_width="158dp"
-                                android:layout_height="141dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/soup" />
-
-                            <ImageButton
-                                android:id="@+id/rank4"
-                                android:layout_width="158dp"
-                                android:layout_height="141dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/soup" />
-
-                            <ImageButton
-                                android:id="@+id/rank5"
-                                android:layout_width="158dp"
-                                android:layout_height="141dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/soup" />
-                        </LinearLayout>
-                    </HorizontalScrollView>
-                </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scaleType="fitXY"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp">
+
+                <HorizontalScrollView
+                    android:layout_width="389dp"
+                    android:layout_height="match_parent"
+                    android:fillViewport="false">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:scaleType="fitXY"
+                        android:layout_marginLeft="5dp">
+
+                        <ImageButton
+                            android:id="@+id/rank1"
+                            android:layout_width="158dp"
+                            android:layout_height="141dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/meat"/>
+
+                        <ImageButton
+                            android:id="@+id/rank2"
+                            android:layout_width="158dp"
+                            android:layout_height="141dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/chicken" />
+
+                        <ImageButton
+                            android:id="@+id/rank3"
+                            android:layout_width="158dp"
+                            android:layout_height="141dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/soup" />
+
+                        <ImageButton
+                            android:id="@+id/rank4"
+                            android:layout_width="158dp"
+                            android:layout_height="141dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/teokbokki" />
+
+                        <ImageButton
+                            android:id="@+id/rank5"
+                            android:layout_width="158dp"
+                            android:layout_height="141dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/sand" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </LinearLayout>
+        <!--        </ScrollView>-->
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"

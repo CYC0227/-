@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ public class MypageActivity extends AppCompatActivity {
     ImageButton button_kind;
     ImageButton button_posting;
 
+    TextView username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,11 @@ public class MypageActivity extends AppCompatActivity {
         button_home = findViewById(R.id.home);
         button_kind = findViewById(R.id.kind);
         button_posting = findViewById(R.id.posting);
+
+        username = findViewById(R.id.username);
+        //여기다가 DB에서 id가져온거 넣기
+        //username.setText();
+
 
         myrecipe.setOnClickListener(new View.OnClickListener() {
             @Override

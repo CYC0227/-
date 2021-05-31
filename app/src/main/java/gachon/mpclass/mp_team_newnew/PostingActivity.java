@@ -1,46 +1,259 @@
 package gachon.mpclass.mp_team_newnew;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.Spinner;
+
+import java.io.File;
+import java.util.List;
+
+import gachon.mpclass.mp_team_newnew.form.FileUploadResponse;
+import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import android.widget.Toast;
 
 public class PostingActivity extends AppCompatActivity {
-    private ListView listView;
-    private ListAdapter adapter;
+    private EditText description;
+    private EditText information;
 
     private EditText edt_title;
     private EditText edt_sub;
-    private ImageButton btn_add;
+    private ImageButton btn_submit;
+    private ImageView btn_photo;
+
+    private EditText ingredients;
+    private EditText ingredients2;
+    private EditText ingredients3;
+    private EditText ingredients4;
+    private EditText ingredients5;
+
+    private EditText ingredients_num;
+    private EditText ingredients_num2;
+    private EditText ingredients_num3;
+    private EditText ingredients_num4;
+    private EditText ingredients_num5;
+
+    private Spinner spi_day;
+    private Spinner spi_country;
+
+    private Uri filePath;
+
+    private final int GET_GALLERY_IMAGE = 200; // 사진 가져오기 위해 쓰인 코드
+    public static String session_email = "kevin";//로그인 되는 순간 생성되야함. LoginActivity로 이동 필요
+
+    RetrofitClient retrofitClient = new RetrofitClient();
+
+    Call<PostingForm> call;
+    Call<FileUploadResponse> callPic;
+
+    ////글포스팅 할 때마다 intent로 마이페이지에 포인트 점수 주기
+    //Intent myIntent = new Intent(this, MypageActivity.class);
+    //int count=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
 
-        // 뷰 참조
-        edt_title = (EditText) findViewById(R.id.edit_ingredients);
-        edt_sub = (EditText) findViewById(R.id.edit_ingredients_num);
-        btn_add = (ImageButton) findViewById(R.id.plus);
-        listView = (ListView) findViewById(R.id.listview);
+        spi_day = findViewById(R.id.spinner_day);
+        spi_country = findViewById(R.id.spinner_country);
 
-        adapter = new ListAdapter(PostingActivity.this);
-        listView.setAdapter(adapter);
+        edt_title = (EditText) findViewById(R.id.title);
+        btn_submit = (ImageButton) findViewById(R.id.submit);
+        btn_photo = (ImageView) findViewById(R.id.plus_photo1) ;
+        information = (EditText) findViewById(R.id.edit_information);
+        description = (EditText) findViewById(R.id.edit_description);
 
-        // 데이터 추가하기
-        btn_add.setOnClickListener(new View.OnClickListener() {
+        ingredients = (EditText) findViewById(R.id.edit_ingredients);
+        ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
+        ingredients3 = (EditText) findViewById(R.id.edit_ingredients3);
+        ingredients4 = (EditText) findViewById(R.id.edit_ingredients4);
+        ingredients5 = (EditText) findViewById(R.id.edit_ingredients5);
+
+        ingredients_num = (EditText) findViewById(R.id.edit_ingredients_num);
+        ingredients_num2 = (EditText) findViewById(R.id.edit_ingredients_num2);
+        ingredients_num3 = (EditText) findViewById(R.id.edit_ingredients_num3);
+        ingredients_num4 = (EditText) findViewById(R.id.edit_ingredients_num4);
+        ingredients_num5 = (EditText) findViewById(R.id.edit_ingredients_num5);
+
+        // 대문 사진 선택하기 (갤러리 접근)
+        btn_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.addItem(edt_title.getText().toString(), edt_sub.getText().toString());
-                edt_title.setText("");
-                edt_sub.setText("");
-
-                adapter.notifyDataSetChanged();
-
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //사진 업로드
+                String[] proj = { MediaStore.Images.Media.DATA };
+                CursorLoader loader = new CursorLoader(getApplicationContext(), filePath, proj, null, null, null);
+                Cursor cursor = loader.loadInBackground();
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+                String result = cursor.getString(column_index);
+                cursor.close();
+
+
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+//                File file = new File(filePath.getPath());
+                File file = new File(result);
+
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+
+                callPic = retrofitClient.retrofitService.uploadFile(body);
+
+
+                callPic.enqueue(new Callback<FileUploadResponse>() {
+                    @Override
+                    public void onResponse(Call<FileUploadResponse> call, Response<FileUploadResponse> response) {
+                        if(response.isSuccessful()){
+                            FileUploadResponse result = response.body();
+
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                        else{
+                            Log.d("tag2","실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FileUploadResponse> call, Throwable t) {
+                        Log.d("tag3","이미지 업로드 실패" + t.getMessage());
+                    }
+                });
+
+
+                PostingForm form = new PostingForm();
+
+                // 추가된 ingredients 정보만큼 돌아야되는데 어떻게 하지?
+                form.setTitle(edt_title.getText().toString());
+                form.setInformation(information.getText().toString());
+                form.setDescription(description.getText().toString());
+                form.setImgURL(file.getName());
+                form.setIngredients_name(ingredients.getText().toString());
+                form.setIngredients_name2(ingredients2.getText().toString());
+                form.setIngredients_name3(ingredients3.getText().toString());
+                form.setIngredients_name4(ingredients4.getText().toString());
+                form.setIngredients_name5(ingredients5.getText().toString());
+                form.setIngredients_quantity(ingredients_num.getText().toString());
+                form.setIngredients_quantity2(ingredients_num2.getText().toString());
+                form.setIngredients_quantity3(ingredients_num3.getText().toString());
+                form.setIngredients_quantity4(ingredients_num4.getText().toString());
+                form.setIngredients_quantity5(ingredients_num5.getText().toString());
+                form.setCountry(spi_country.getSelectedItem().toString());
+                form.setAnniversary(spi_day.getSelectedItem().toString());
+
+                call = retrofitClient.retrofitService.setPostBody(form, session_email);
+
+                call.enqueue(new Callback<PostingForm>() {
+                    @Override
+                    public void onResponse(Call<PostingForm> call, Response<PostingForm> response) {
+                        if(response.isSuccessful()){
+                            PostingForm result = response.body();
+
+                            Log.d("tag1","성공" + result.toString());
+                        }
+                        else{
+                            Log.d("tag2","실패");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostingForm> call, Throwable t) {
+                        Log.d("tag3","실패" + t.getMessage());
+//서버와 통신가능하지만, 여러 수정필요
+                    }
+                });
+                
+                //test
+                Call<List<PostingForm>> call2;
+                call2 = retrofitClient.retrofitService.getPosts("demouser");
+//
+//                call2.enqueue(new Callback<PostingForm>() {
+//                    @Override
+//                    public void onResponse(Call<PostingForm> call, Response<PostingForm> response) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<PostingForm> call, Throwable t) {
+//
+//                    }
+//                });
+
+                call2.enqueue(new Callback<List<PostingForm>>() {
+                    @Override
+                    public void onResponse(Call<List<PostingForm>> call, Response<List<PostingForm>> response) {
+                        for(PostingForm postingForm: response.body()) {
+                            System.out.println(postingForm.toString());
+                            System.out.println("aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbb");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<PostingForm>> call, Throwable t) {
+                        System.out.println(t.getMessage());
+                        Log.d("tag4","실패" + t.getMessage());
+                    }
+                });
+
+
+                //test
+
+                //값 전달하기///////////////
+                //count += count;
+                //myIntent.putExtra("coumt",count);
+                //StartActivity(myIntent);
+
+
+
+                // 포스팅 성공하면 토스트메시지 + 창 닫아주기
+                Toast.makeText(getApplicationContext(), "포스팅 성공!", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri selectedImageUri = data.getData();
+            filePath = selectedImageUri;
+            btn_photo.setImageURI(selectedImageUri);
+            btn_photo.setBackgroundColor(00000000);
+
+        }
 
     }
 

@@ -26,16 +26,19 @@
                 <ImageView
                     android:id="@+id/posting_table"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/posting_rec"
-                    android:scaleType="fitXY"/>
+                    android:layout_height="117dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/posting_rec1" />
+
+
                 <ImageView
                     android:id="@+id/plus_photo1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/add_photo"
-                    android:layout_margin="16dp" />
-
+                    android:layout_height="260dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_margin="30dp"
+                    android:background="@drawable/add_photo" />
 
                 <EditText
                     android:id="@+id/title"
@@ -50,6 +53,37 @@
                     android:paddingBottom="7dp"
                     android:paddingLeft="20dp"
                     android:background="@drawable/shape2"/>
+
+                <TextView
+                    android:id="@+id/text_kind_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Day category"
+                    android:textColor="@color/black"
+                    android:layout_margin="15dp"
+                    android:textSize="24dp"/>
+
+                <Spinner
+                    android:id="@+id/spinner_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:entries="@array/kind_day"
+                    android:spinnerMode="dialog" />
+                <TextView
+                    android:id="@+id/text_kind_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Country category"
+                    android:textColor="@color/black"
+                    android:layout_margin="15dp"
+                    android:textSize="24dp"/>
+
+                <Spinner
+                    android:id="@+id/spinner_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:entries="@array/kind_country"
+                    android:spinnerMode="dialog" />
 
                 <TextView
                     android:id="@+id/text_description"
@@ -105,16 +139,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/text_ingredients"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ingredients"
-                    android:textColor="@color/black"
-                    android:layout_margin="15dp"
-                    android:textSize="24dp"/>
+
+                    <TextView
+                        android:id="@+id/text_ingredients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="Ingredients"
+                        android:textColor="@color/black"
+                        android:textSize="24dp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,16 +163,16 @@
 
                     <EditText
                         android:id="@+id/edit_ingredients"
-                        android:layout_width="150dp"
+                        android:layout_width="186dp"
                         android:layout_height="55dp"
                         android:layout_marginLeft="20dp"
+                        android:background="@drawable/shape2"
                         android:hint="Ingredient"
-                        android:scaleType="fitXY"
-                        android:textSize="22dp"
+                        android:paddingLeft="10dp"
                         android:paddingTop="7dp"
                         android:paddingBottom="7dp"
-                        android:paddingLeft="10dp"
-                        android:background="@drawable/shape2"/>
+                        android:scaleType="fitXY"
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edit_ingredients_num"
@@ -148,6 +187,161 @@
                         android:paddingBottom="7dp"
                         android:paddingLeft="7dp"
                         android:background="@drawable/shape2"/>
+
+                    <!--                    <ImageButton-->
+                    <!--                        android:id="@+id/plus"-->
+                    <!--                        android:layout_width="14dp"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:background="@color/x"-->
+                    <!--                        app:srcCompat="@drawable/plus_button" />-->
+
+                </LinearLayout>
+
+                <!--                -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/edit_ingredients2"
+                        android:layout_width="186dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/shape2"
+                        android:hint="Ingredient"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edit_ingredients_num2"
+                        android:layout_width="88dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="num"
+                        android:gravity="center"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:paddingLeft="7dp"
+                        android:background="@drawable/shape2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/edit_ingredients3"
+                        android:layout_width="186dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/shape2"
+                        android:hint="Ingredient"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edit_ingredients_num3"
+                        android:layout_width="88dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="num"
+                        android:gravity="center"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:paddingLeft="7dp"
+                        android:background="@drawable/shape2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/edit_ingredients4"
+                        android:layout_width="186dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/shape2"
+                        android:hint="Ingredient"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edit_ingredients_num4"
+                        android:layout_width="88dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="num"
+                        android:gravity="center"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:paddingLeft="7dp"
+                        android:background="@drawable/shape2"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginTop="10dp">
+
+                    <EditText
+                        android:id="@+id/edit_ingredients5"
+                        android:layout_width="186dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/shape2"
+                        android:hint="Ingredient"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp" />
+
+                    <EditText
+                        android:id="@+id/edit_ingredients_num5"
+                        android:layout_width="88dp"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="num"
+                        android:gravity="center"
+                        android:scaleType="fitXY"
+                        android:textSize="22dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:paddingLeft="7dp"
+                        android:background="@drawable/shape2"/>
+
                     <ImageButton
                         android:id="@+id/plus"
                         android:layout_width="14dp"
@@ -157,13 +351,29 @@
                         app:srcCompat="@drawable/plus_button" />
                 </LinearLayout>
 
-                <ListView
-                    android:id="@+id/listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="266dp"
-                    android:scrollbars="none" />
+                <!--                <ListView-->
+                <!--                    android:id="@+id/listview"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="274dp"-->
+                <!--                    android:scrollbars="none" />-->
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_save"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="15dp"
+                        android:text="Submit">
+                    </ImageButton>
+                </RelativeLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
 </LinearLayout>

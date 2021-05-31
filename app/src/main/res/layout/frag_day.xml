@@ -25,14 +25,16 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
+
                 <ImageButton
                     android:id="@+id/btnChristmas"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#00FFFFFF"
-                    app:srcCompat="@drawable/christmas"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="#00FFFFFF"
+                    app:srcCompat="@drawable/christmas" />
+
                 <ImageButton
                     android:id="@+id/btnCamping"
                     android:layout_width="wrap_content"
