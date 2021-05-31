@@ -19,6 +19,10 @@
         android:theme="@style/Theme.Mp_team_newnew"
         android:usesCleartextTraffic="true">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBar8yw8TOHbP5U0VgwJL5gci9TfDy2cwc" />
+
         <activity android:name=".SaleActivity" />
         <activity android:name=".ChristmasActivity" />
 
@@ -34,6 +38,7 @@
         <activity android:name="MyrecipeClicked" />
         <activity android:name=".IndiaActivity" />
         <activity android:name=".SalePostingActivity" />
+        <activity android:name=".api.MapsActivity" />
         <activity android:name=".StartActivity">
 
             <intent-filter>
