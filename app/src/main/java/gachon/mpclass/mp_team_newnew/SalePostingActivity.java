@@ -82,6 +82,8 @@ public class SalePostingActivity extends AppCompatActivity {
                 form.setAddress_around(address_around_found);
                 System.out.println("@@@address_around_found 2 = " + address_around_found);
 
+                SaleActivity.saleFormList.add(form);
+
                 callTodaySale = retrofitClient.retrofitService.postTodaySale(form);
 
                 callTodaySale.enqueue(new Callback<TodaySaleForm>() {

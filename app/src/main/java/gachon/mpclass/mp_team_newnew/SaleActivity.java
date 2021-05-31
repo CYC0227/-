@@ -19,6 +19,9 @@ import java.util.List;
 import gachon.mpclass.mp_team_newnew.api.MyGeoCoder;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SaleActivity extends AppCompatActivity {
     ImageButton btn_inform;
@@ -28,6 +31,7 @@ public class SaleActivity extends AppCompatActivity {
     private String address ="";
 
     static List<TodaySaleForm> saleFormList = new ArrayList<>();
+    RetrofitClient retrofitClient = new RetrofitClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,31 @@ public class SaleActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "현재 나의 위치 : " + str, Toast.LENGTH_LONG).show();
                 // Log.d("rev", address);
+
+
+                //test
+                Call<List<TodaySaleForm>> callTodaySaleList;
+                callTodaySaleList = retrofitClient.retrofitService.getTodaySalesAround(address);
+
+                callTodaySaleList.enqueue(new Callback<List<TodaySaleForm>>() {
+                    @Override
+                    public void onResponse(Call<List<TodaySaleForm>> call, Response<List<TodaySaleForm>> response) {
+                        for (TodaySaleForm todaySaleForm : response.body()) {
+                            saleFormList.add(todaySaleForm);
+
+                            System.out.println("postingForm = " + todaySaleForm);
+                            System.out.println("@22#313213131233133131313!!!");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TodaySaleForm>> call, Throwable t) {
+                        Log.d("TAG", "Today Sale Error: " + t.getLocalizedMessage());
+
+                    }
+                });
+
+
             }
         });
 
