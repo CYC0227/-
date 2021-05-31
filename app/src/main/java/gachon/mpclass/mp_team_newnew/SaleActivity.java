@@ -32,6 +32,7 @@ public class SaleActivity extends AppCompatActivity {
 
     private boolean clicked = false;
 
+
     static List<TodaySaleForm> saleFormList = new ArrayList<>();
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -40,6 +41,10 @@ public class SaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
 
+        // 들어오자마자 기록되어있는 동네특가 정보 확인 가능
+        SaleAdapter adapter = new SaleAdapter(this, R.layout.sale_item, saleFormList);
+        ListView listView = findViewById(R.id.listview);
+        listView.setAdapter(adapter);
 
         // 본인 주소 찾기 버튼 (find my location)
         btn_address = (ImageButton) findViewById(R.id.btn_address);
@@ -82,8 +87,6 @@ public class SaleActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
 
@@ -116,11 +119,8 @@ public class SaleActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if(requestCode == 1){
                 //어댑터
-                ListView listView = findViewById(R.id.listview);
                 SaleAdapter adapter = new SaleAdapter(this, R.layout.sale_item, saleFormList);
-
-                // db에서 정보 가져와서 adapter에 추가해야됨
-
+                ListView listView = findViewById(R.id.listview);
                 listView.setAdapter(adapter);
 
                 Toast.makeText(getApplicationContext(), " 동네특가 등록 성공! ", Toast.LENGTH_LONG).show();
