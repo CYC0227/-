@@ -140,6 +140,38 @@ public class PostingForm {
         return ingredients_name4;
     }
 
+    public void setIngredients_name2(String ingredients_name2) {
+        this.ingredients_name2 = ingredients_name2;
+    }
+
+    public void setIngredients_quantity2(String ingredients_quantity2) {
+        this.ingredients_quantity2 = ingredients_quantity2;
+    }
+
+    public void setIngredients_name3(String ingredients_name3) {
+        this.ingredients_name3 = ingredients_name3;
+    }
+
+    public void setIngredients_quantity3(String ingredients_quantity3) {
+        this.ingredients_quantity3 = ingredients_quantity3;
+    }
+
+    public void setIngredients_name4(String ingredients_name4) {
+        this.ingredients_name4 = ingredients_name4;
+    }
+
+    public void setIngredients_quantity4(String ingredients_quantity4) {
+        this.ingredients_quantity4 = ingredients_quantity4;
+    }
+
+    public void setIngredients_name5(String ingredients_name5) {
+        this.ingredients_name5 = ingredients_name5;
+    }
+
+    public void setIngredients_quantity5(String ingredients_quantity5) {
+        this.ingredients_quantity5 = ingredients_quantity5;
+    }
+
     public String getIngredients_quantity4() {
         return ingredients_quantity4;
     }

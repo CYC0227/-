@@ -20,6 +20,7 @@ import java.util.List;
 import gachon.mpclass.mp_team_newnew.api.GpsTracker;
 import gachon.mpclass.mp_team_newnew.api.WeatherAPI;
 import gachon.mpclass.mp_team_newnew.form.PostingForm;
+import gachon.mpclass.mp_team_newnew.form.TodaySaleForm;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
     List<PostingForm> postingFormList = new ArrayList<>();
     List<PostingForm> postingFormList2 = new ArrayList<>();
 
+    List<TodaySaleForm> todaySaleForms = new ArrayList<>();
 
     RetrofitClient retrofitClient = new RetrofitClient();
+
     Call<List<PostingForm>> call;
+    Call<TodaySaleForm> callTodaySale;
 
     GpsTracker gpsTracker;
     WeatherAPI weatherAPI;

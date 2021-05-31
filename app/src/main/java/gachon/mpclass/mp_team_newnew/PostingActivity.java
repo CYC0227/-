@@ -5,29 +5,18 @@ import androidx.loader.content.CursorLoader;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import gachon.mpclass.mp_team_newnew.form.FileUploadResponse;
@@ -35,57 +24,11 @@ import gachon.mpclass.mp_team_newnew.form.PostingForm;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Multipart;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.CursorLoader;
-
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import gachon.mpclass.mp_team_newnew.form.FileUploadResponse;
-import gachon.mpclass.mp_team_newnew.form.PostingForm;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Multipart;
 
 public class PostingActivity extends AppCompatActivity {
     private EditText description;
@@ -96,17 +39,20 @@ public class PostingActivity extends AppCompatActivity {
     private ImageButton btn_submit;
     private ImageView btn_photo;
 
-    private EditText edit_ingredients;
-    private EditText edit_ingredients2;
-    private EditText edit_ingredients3;
-    private EditText edit_ingredients4;
-    private EditText edit_ingredients5;
+    private EditText ingredients;
+    private EditText ingredients2;
+    private EditText ingredients3;
+    private EditText ingredients4;
+    private EditText ingredients5;
 
-    private EditText edit_ingredients_num;
-    private EditText edit_ingredients_num2;
-    private EditText edit_ingredients_num3;
-    private EditText edit_ingredients_num4;
-    private EditText edit_ingredients_num5;
+    private EditText ingredients_num;
+    private EditText ingredients_num2;
+    private EditText ingredients_num3;
+    private EditText ingredients_num4;
+    private EditText ingredients_num5;
+
+    private Spinner spi_day;
+    private Spinner spi_country;
 
     private Uri filePath;
 
@@ -128,31 +74,26 @@ public class PostingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
 
-        // spinner
-        Spinner spi_day = findViewById(R.id.spinner_day);
-        //final String kind_day = spi_day.getSelectedItem().toString();
+        spi_day = findViewById(R.id.spinner_day);
+        spi_country = findViewById(R.id.spinner_country);
 
-        Spinner spi_country = findViewById(R.id.spinner_country);
-        //final String kind_country = spi_country.getSelectedItem().toString();
-
-        // 뷰 참조
         edt_title = (EditText) findViewById(R.id.title);
         btn_submit = (ImageButton) findViewById(R.id.submit);
         btn_photo = (ImageView) findViewById(R.id.plus_photo1) ;
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
-        //
-        edit_ingredients = (EditText) findViewById(R.id.edit_ingredients);
-        edit_ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
-        edit_ingredients3 = (EditText) findViewById(R.id.edit_ingredients3);
-        edit_ingredients4 = (EditText) findViewById(R.id.edit_ingredients4);
-        edit_ingredients5 = (EditText) findViewById(R.id.edit_ingredients5);
 
-        edit_ingredients_num = (EditText) findViewById(R.id.edit_ingredients_num);
-        edit_ingredients_num2 = (EditText) findViewById(R.id.edit_ingredients_num2);
-        edit_ingredients_num3 = (EditText) findViewById(R.id.edit_ingredients_num3);
-        edit_ingredients_num4 = (EditText) findViewById(R.id.edit_ingredients_num4);
-        edit_ingredients_num5 = (EditText) findViewById(R.id.edit_ingredients_num5);
+        ingredients = (EditText) findViewById(R.id.edit_ingredients);
+        ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
+        ingredients3 = (EditText) findViewById(R.id.edit_ingredients3);
+        ingredients4 = (EditText) findViewById(R.id.edit_ingredients4);
+        ingredients5 = (EditText) findViewById(R.id.edit_ingredients5);
+
+        ingredients_num = (EditText) findViewById(R.id.edit_ingredients_num);
+        ingredients_num2 = (EditText) findViewById(R.id.edit_ingredients_num2);
+        ingredients_num3 = (EditText) findViewById(R.id.edit_ingredients_num3);
+        ingredients_num4 = (EditText) findViewById(R.id.edit_ingredients_num4);
+        ingredients_num5 = (EditText) findViewById(R.id.edit_ingredients_num5);
 
         // 대문 사진 선택하기 (갤러리 접근)
         btn_photo.setOnClickListener(new View.OnClickListener() {
@@ -217,19 +158,18 @@ public class PostingActivity extends AppCompatActivity {
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
                 form.setImgURL(file.getName());
-                // 임의의 ingredients form에 넣어두기
-                // 오빠님이 아래 주석한거에 맞게 PostingForm에 ingredients 5개 만들어주시면 됩니다용
-//                form.setIngredients_name(edit_ingredients.getText().toString());
-//                form.setIngredients_name2(edit_ingredients2.getText().toString());
-//                form.setIngredients_name3(edit_ingredients3.getText().toString());
-//                form.setIngredients_name4(edit_ingredients4.getText().toString());
-//                form.setIngredients_name5(edit_ingredients5.getText().toString());
-//
-//                form.setIngredients_quantity(edit_ingredients_num.getText().toString());
-//                form.setIngredients_quantity2(edit_ingredients_num2.getText().toString());
-//                form.setIngredients_quantity3(edit_ingredients_num3.getText().toString());
-//                form.setIngredients_quantity4(edit_ingredients_num4.getText().toString());
-//                form.setIngredients_quantity5(edit_ingredients_num5.getText().toString());
+                form.setIngredients_name(ingredients.getText().toString());
+                form.setIngredients_name2(ingredients2.getText().toString());
+                form.setIngredients_name3(ingredients3.getText().toString());
+                form.setIngredients_name4(ingredients4.getText().toString());
+                form.setIngredients_name5(ingredients5.getText().toString());
+                form.setIngredients_quantity(ingredients_num.getText().toString());
+                form.setIngredients_quantity2(ingredients_num2.getText().toString());
+                form.setIngredients_quantity3(ingredients_num3.getText().toString());
+                form.setIngredients_quantity4(ingredients_num4.getText().toString());
+                form.setIngredients_quantity5(ingredients_num5.getText().toString());
+                form.setCountry(spi_country.getSelectedItem().toString());
+                form.setAnniversary(spi_day.getSelectedItem().toString());
 
                 call = retrofitClient.retrofitService.setPostBody(form, session_email);
 
