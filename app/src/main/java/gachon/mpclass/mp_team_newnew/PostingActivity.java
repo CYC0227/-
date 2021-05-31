@@ -212,19 +212,18 @@ public class PostingActivity extends AppCompatActivity {
                 form.setInformation(information.getText().toString());
                 form.setDescription(description.getText().toString());
                 form.setImgURL(file.getName());
-                // 임의의 ingredients form에 넣어두기
-                // 오빠님이 아래 주석한거에 맞게 PostingForm에 ingredients 5개 만들어주시면 됩니다용
-//                form.setIngredients_name(edit_ingredients.getText().toString());
-//                form.setIngredients_name2(edit_ingredients2.getText().toString());
-//                form.setIngredients_name3(edit_ingredients3.getText().toString());
-//                form.setIngredients_name4(edit_ingredients4.getText().toString());
-//                form.setIngredients_name5(edit_ingredients5.getText().toString());
-//
-//                form.setIngredients_quantity(edit_ingredients_num.getText().toString());
-//                form.setIngredients_quantity2(edit_ingredients_num2.getText().toString());
-//                form.setIngredients_quantity3(edit_ingredients_num3.getText().toString());
-//                form.setIngredients_quantity4(edit_ingredients_num4.getText().toString());
-//                form.setIngredients_quantity5(edit_ingredients_num5.getText().toString());
+                form.setIngredients_name(edit_ingredients.getText().toString());
+                form.setIngredients_name2(edit_ingredients2.getText().toString());
+                form.setIngredients_name3(edit_ingredients3.getText().toString());
+                form.setIngredients_name4(edit_ingredients4.getText().toString());
+                form.setIngredients_name5(edit_ingredients5.getText().toString());
+                form.setIngredients_quantity(edit_ingredients_num.getText().toString());
+                form.setIngredients_quantity2(edit_ingredients_num2.getText().toString());
+                form.setIngredients_quantity3(edit_ingredients_num3.getText().toString());
+                form.setIngredients_quantity4(edit_ingredients_num4.getText().toString());
+                form.setIngredients_quantity5(edit_ingredients_num5.getText().toString());
+                form.setCountry(spi_country.getSelectedItem().toString());
+                form.setAnniversary(spi_day.getSelectedItem().toString());
 
                 call = retrofitClient.retrofitService.setPostBody(form, session_email);
 
