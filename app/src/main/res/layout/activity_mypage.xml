@@ -29,31 +29,63 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="40dp">
                 <ImageView
                     android:id="@+id/profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/profile_image"/>
+
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/point"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/point"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        app:srcCompat="@drawable/point"-->
+                    <!--                        android:scaleType="fitXY"/>-->
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/point"
-                        android:scaleType="fitXY"/>
+                        android:layout_marginLeft="15dp"
+                        android:scaleType="fitXY"
+                        android:text="User" />
+
                     <ImageView
                         android:id="@+id/heart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/heart"
-                        android:scaleType="fitXY"/>
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/heart" />
                 </LinearLayout>
+<!---->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:scaleType="fitXY"
+                        android:text="Username" />
+
+                    <TextView
+                        android:id="@+id/heartnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="3dp"
+                        android:scaleType="fitXY"
+                        android:text="2" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
