@@ -60,14 +60,9 @@ public class SalePostingActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TextView 클릭될 시 할 코드작성 ( 지도 띄워서 사용자가 가게 이름 입력한 후에 주소 받아올 수 있도록해서 받아온 한글주소를 textview에 저장  )
-                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivityForResult(intent, 1);
-                /* 이 부분에 저장해줘
-                info = ;
-                address_store = ;
-                */
 
+                //info = "";
+                address_around = "경기도 성남시 수정구 성남대로 1342";
             }
         });
 
