@@ -30,6 +30,8 @@ public class SaleActivity extends AppCompatActivity {
     private String str;
     private String address ="";
 
+    private boolean clicked = false;
+
     static List<TodaySaleForm> saleFormList = new ArrayList<>();
     RetrofitClient retrofitClient = new RetrofitClient();
 
@@ -55,6 +57,7 @@ public class SaleActivity extends AppCompatActivity {
                 System.out.println("@@@address_around_found = " + address);
 
                 Toast.makeText(getApplicationContext(), "현재 나의 위치 : " + str, Toast.LENGTH_LONG).show();
+                clicked = true;
                 // Log.d("rev", address);
 
 
@@ -89,6 +92,11 @@ public class SaleActivity extends AppCompatActivity {
         btn_inform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(clicked == false){
+                    Toast.makeText(getApplicationContext(), "'find my location'을 눌러 현재 위치를 확인해주세요! ", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 // information 입력하는 activity로 이동 ( SalePostingActivity )
                 Intent myintent = new Intent(getApplicationContext(), SalePostingActivity.class);
 
