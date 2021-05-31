@@ -51,6 +51,9 @@ public class PostingActivity extends AppCompatActivity {
     private EditText ingredients_num4;
     private EditText ingredients_num5;
 
+    private Spinner spi_day;
+    private Spinner spi_country;
+
     private Uri filePath;
 
     private final int GET_GALLERY_IMAGE = 200; // 사진 가져오기 위해 쓰인 코드
@@ -66,20 +69,15 @@ public class PostingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
 
-        // spinner
-        Spinner spi_day = findViewById(R.id.spinner_day);
-        //final String kind_day = spi_day.getSelectedItem().toString();
+        spi_day = findViewById(R.id.spinner_day);
+        spi_country = findViewById(R.id.spinner_country);
 
-        Spinner spi_country = findViewById(R.id.spinner_country);
-        //final String kind_country = spi_country.getSelectedItem().toString();
-
-        // 뷰 참조
         edt_title = (EditText) findViewById(R.id.title);
         btn_submit = (ImageButton) findViewById(R.id.submit);
         btn_photo = (ImageView) findViewById(R.id.plus_photo1) ;
         information = (EditText) findViewById(R.id.edit_information);
         description = (EditText) findViewById(R.id.edit_description);
-        //
+
         ingredients = (EditText) findViewById(R.id.edit_ingredients);
         ingredients2 = (EditText) findViewById(R.id.edit_ingredients2);
         ingredients3 = (EditText) findViewById(R.id.edit_ingredients3);
