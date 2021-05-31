@@ -42,7 +42,7 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
 
 
 
-        MyrecipeAdapter adapter = new MyrecipeAdapter(this, R.layout.myrecipe_item, postingFormList2, imgList2);
+        ChristmasAdapter adapter = new ChristmasAdapter(this, R.layout.myrecipe_item, postingFormList2, imgList2);
 
         listView.setAdapter(adapter);
 
@@ -75,15 +75,6 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
             }
         });
-/*
-        // 하트 누르기
-        heart = (ImageButton) findViewById(R.id.heart);
-        heart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //point 점수 10점 더하는 로직
-            }
-        });*/
 
 
     }
@@ -91,35 +82,4 @@ public class ChristmasActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
     }
-
-//    class MyAdapter extends BaseAdapter {
-//        private List<PostingForm> adapterPostingForms = new ArrayList<>();
-//
-//        public void addItems(List<PostingForm> postingFormList){
-//            this.adapterPostingForms = postingFormList;
-//        }
-//        @Override
-//        public int getCount() {
-//            return adapterPostingForms.size();
-//        }
-//
-//        @Override
-//        public PostingForm getItem(int position) {
-//            return adapterPostingForms.get(position);
-//        }
-//
-//        @Override
-//        public long getItemId(int position) {
-//            return position;
-//        }
-//
-//        @Override
-//        public View getView(final int position, final View convertView, ViewGroup parent) {
-//            MyItemView view = new MyItemView(getApplicationContext());
-//
-//            PostingForm form = adapterPostingForms.get(position);
-//            view.setId(form.getTitle());
-//            return view;
-//        }
-//   }
 }
