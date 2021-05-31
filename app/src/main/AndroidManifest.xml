@@ -21,6 +21,7 @@
 
         <activity android:name=".SaleActivity" />
         <activity android:name=".ChristmasActivity" />
+
         <activity android:name=".ClassificationActivity" />
         <activity android:name=".MypageActivity" />
         <activity android:name=".MyrecipeActivity" />
@@ -34,6 +35,7 @@
         <activity android:name=".IndiaActivity" />
         <activity android:name=".SalePostingActivity" />
         <activity android:name=".StartActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
